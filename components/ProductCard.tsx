@@ -13,10 +13,24 @@ export default function ProductCard({ p, className = "" }: { p: Product; classNa
       <div className="relative aspect-[4/5] overflow-hidden bg-beige">
         <Link href={`/products/${p.slug}`} aria-label={p.name} className="block h-full w-full">
           {/* primary + secondary crossfade */}
-          <div className="absolute inset-0 transition-all duration-[900ms] ease-soft group-hover:scale-[1.04] group-hover:opacity-0"><Scene kind={p.scene} tone={p.tone} seed={p.slug.length} /></div>
-          <div className="absolute inset-0 scale-[1.02] opacity-0 transition-all duration-[900ms] ease-soft group-hover:scale-100 group-hover:opacity-100"><Scene kind="botanical" tone={p.tone} seed={p.slug.length + 3} /><div className="absolute inset-0 bg-cream/10" /></div>
+          <div className="absolute inset-0 transition-all duration-[900ms] ease-soft group-hover:scale-[1.04] group-hover:opacity-0">
+            <Scene kind={p.scene} tone={p.tone} seed={p.slug.length} image={p.image} alt={`${p.name} — ${p.sub}`} />
+          </div>
+          <div className="absolute inset-0 scale-[1.02] opacity-0 transition-all duration-[900ms] ease-soft group-hover:scale-100 group-hover:opacity-100">
+            <Scene kind="botanical" tone={p.tone} seed={p.slug.length + 3} image={p.hoverImage || p.image} alt={`${p.name} lifestyle view`} />
+            <div className="absolute inset-0 bg-cream/10" />
+          </div>
         </Link>
-        <button aria-label="Save to wishlist" onClick={() => toggleWish(p.slug)} className="absolute right-3 top-3 p-2 opacity-70 transition-opacity hover:opacity-100">
+        {p.badge && (
+          <span className="eyebrow absolute left-3 top-3 bg-cream/90 px-2.5 py-1 text-[9px] text-charcoal backdrop-blur-[2px]">
+            {p.badge}
+          </span>
+        )}
+        <button
+          aria-label="Save to wishlist"
+          onClick={() => toggleWish(p.slug)}
+          className="absolute right-3 top-3 rounded-full bg-cream/75 p-2 opacity-85 backdrop-blur-[2px] transition-opacity hover:opacity-100"
+        >
           <Heart size={18} strokeWidth={1.2} className={wished ? "fill-terracotta text-terracotta" : "text-charcoal"} />
         </button>
         <button
@@ -34,7 +48,10 @@ export default function ProductCard({ p, className = "" }: { p: Product; classNa
         <p className="mt-2 flex items-center justify-center gap-1 text-[11px] text-charcoal/60">
           <Star size={11} strokeWidth={1.2} className="fill-terracotta text-terracotta" /> {p.rating.toFixed(1)} <span>({p.reviews})</span>
         </p>
-        <p className="mt-2 text-[13px] tracking-wide">{p.variants.length > 1 ? "From " : ""}{formatKSh(fromPrice(p))}</p>
+        <p className="mt-2 text-[13px] tracking-wide">
+          {p.variants.length > 1 ? "From " : ""}
+          {formatKSh(fromPrice(p))}
+        </p>
       </div>
     </article>
   );
