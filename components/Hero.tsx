@@ -1,152 +1,149 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import Scene from "./Scene";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import Scene, { type SceneKind } from "./Scene";
+
+const slides: {
+  eyebrow: string;
+  title: string;
+  cta: string;
+  href: string;
+  scene: SceneKind;
+  tone: number;
+  seed: number;
+  image: string;
+}[] = [
+  {
+    eyebrow: "KIPUSA BEAUTY · BOTANICAL OILS, SCRUBS & SKINCARE",
+    title: "NOURISHING RITUALS FOR SKIN & BODY",
+    cta: "SHOP NOW",
+    href: "/collections/kipusa-beauty",
+    scene: "soap",
+    tone: 0,
+    seed: 2,
+    image:
+      "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=1800&q=85",
+  },
+  {
+    eyebrow: "KIPUSA PRINTS · PRINTING, GRAPHIC DESIGN, E-CITIZEN & DHL",
+    title: "COMMITTED TO DELIVERING SWIFT SERVICES",
+    cta: "EXPLORE SERVICES",
+    href: "/collections/kipusa-prints",
+    scene: "artisan",
+    tone: 2,
+    seed: 5,
+    image:
+      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1800&q=85",
+  },
+  {
+    eyebrow: "KIPUSA HOME · HAND-POURED CANDLES, SOAPS & LIVING",
+    title: "WARMTH & CALM FOR EVERYDAY SPACES",
+    cta: "SHOP NOW",
+    href: "/collections/kipusa-home",
+    scene: "candle",
+    tone: 2,
+    seed: 4,
+    image:
+      "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1800&q=85",
+  },
+  {
+    eyebrow: "KIPUSA LIMITED · BEAUTY · PRINTS · HOME",
+    title: "THOUGHTFULLY CRAFTED IN KENYA",
+    cta: "SHOP ALL",
+    href: "/shop",
+    scene: "botanical",
+    tone: 1,
+    seed: 8,
+    image:
+      "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=1800&q=85",
+  },
+];
 
 export default function Hero() {
+  const [i, setI] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setI((n) => (n + 1) % slides.length), 7000);
+    return () => clearInterval(t);
+  }, []);
+
+  const s = slides[i];
+
   return (
-    <section className="relative overflow-hidden border-b border-sand bg-beige/60">
-      <div className="wrap py-10 md:py-16 lg:py-20">
-        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
-          {/* Left Editorial Introduction */}
-          <div className="lg:col-span-6">
-            <span className="eyebrow inline-block rounded-full border border-forest/20 bg-white px-3.5 py-1.5 text-[10px] text-forest">
-              Welcome to Kipusa Limited
-            </span>
-            <h1 className="display h-xl mt-5 text-charcoal">
-              Thoughtful essentials across{" "}
-              <span className="italic text-forest">Beauty, Prints</span> &amp;{" "}
-              <span className="italic text-terracotta">Home.</span>
-            </h1>
-            <p className="mt-5 max-w-[54ch] text-base leading-relaxed text-charcoal/75 md:text-lg">
-              Discover nourishing botanical skincare from{" "}
-              <strong className="font-medium text-charcoal">Kipusa Beauty</strong>,
-              swift printing, graphic design, E-Citizen, and DHL services from{" "}
-              <strong className="font-medium text-charcoal">Kipusa Prints</strong>,
-              and calming everyday living essentials from{" "}
-              <strong className="font-medium text-charcoal">Kipusa Home</strong>.
+    <section className="relative h-[calc(100svh-120px)] min-h-[520px] w-full overflow-hidden md:h-[calc(100svh-152px)]">
+      {/* Background Image Crossfade + Subtle Zoom */}
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={i}
+          className="absolute inset-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.4, ease: "easeInOut" }}
+        >
+          <motion.div
+            className="h-full w-full"
+            initial={{ scale: 1.06 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 8, ease: "linear" }}
+          >
+            <Scene
+              kind={s.scene}
+              tone={s.tone}
+              seed={s.seed}
+              image={s.image}
+              alt={s.title}
+            />
+          </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent" />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Bottom-Left Overlay Copy & Olive-Taupe Button (Matching Screenshot) */}
+      <div className="wrap relative flex h-full flex-col justify-end pb-16 md:pb-24 text-white">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={i}
+            className="flex max-w-[920px] flex-col items-start text-left"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.7 }}
+          >
+            <p className="mb-3 text-[11px] font-normal uppercase tracking-[0.22em] text-white/95 md:mb-4 md:text-[12px]">
+              {s.eyebrow}
             </p>
-
-            {/* Primary CTAs */}
-            <div className="mt-8 flex flex-wrap items-center gap-3.5">
-              <Link href="/shop" className="btn btn-dark gap-2">
-                <span>Shop Products</span>
-                <ArrowRight size={15} />
-              </Link>
-              <Link href="/collections/kipusa-prints" className="btn btn-line-dark">
-                Explore Kipusa Prints Services
-              </Link>
-            </div>
-
-            {/* Quick Section Pills */}
-            <div className="mt-10 border-t border-sand pt-6">
-              <p className="eyebrow mb-3 text-[10px] text-olive">
-                Explore by Business Division
-              </p>
-              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
-                {[
-                  {
-                    name: "Kipusa Beauty",
-                    sub: "Oils, scrubs & body care",
-                    href: "/collections/kipusa-beauty",
-                  },
-                  {
-                    name: "Kipusa Prints",
-                    sub: "Print, design, E-Citizen & DHL",
-                    href: "/collections/kipusa-prints",
-                  },
-                  {
-                    name: "Kipusa Home",
-                    sub: "Candles, soaps & living",
-                    href: "/collections/kipusa-home",
-                  },
-                ].map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="group rounded-xl border border-sand bg-white p-3.5 transition-all hover:border-forest hover:shadow-sm"
-                  >
-                    <p className="flex items-center justify-between font-serif text-lg font-medium text-charcoal group-hover:text-forest">
-                      <span>{item.name}</span>
-                      <ArrowRight
-                        size={14}
-                        className="transition-transform group-hover:translate-x-0.5"
-                      />
-                    </p>
-                    <p className="mt-0.5 text-xs text-charcoal/65">{item.sub}</p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right Split Visual Showcase */}
-          <div className="grid grid-cols-12 gap-4 lg:col-span-6">
-            <div className="col-span-7 overflow-hidden rounded-2xl border border-sand bg-white shadow-sm">
-              <div className="aspect-[4/5] w-full overflow-hidden">
-                <Scene
-                  kind="bottle"
-                  tone={1}
-                  seed={3}
-                  image="https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=1200&q=85"
-                  alt="Kipusa Beauty botanical facial oils and body care"
-                />
-              </div>
-              <div className="p-3.5 sm:p-4">
-                <p className="eyebrow text-[9px] text-olive">Kipusa Beauty</p>
-                <p className="font-serif text-base text-charcoal sm:text-lg">
-                  Botanical Oils, Scrubs &amp; Butters
-                </p>
-              </div>
-            </div>
-
-            <div className="col-span-5 flex flex-col justify-between gap-4">
+            <h1 className="font-sans text-2xl font-normal uppercase tracking-[0.18em] text-white sm:text-4xl md:text-[42px] md:leading-[1.2]">
+              {s.title}
+            </h1>
+            <div className="mt-7 md:mt-9">
               <Link
-                href="/collections/kipusa-prints"
-                className="group overflow-hidden rounded-2xl border border-sand bg-white shadow-sm transition-colors hover:border-forest"
+                href={s.href}
+                className="inline-flex items-center justify-center bg-[#8A856D] px-9 py-4 text-[11px] font-normal uppercase tracking-[0.24em] text-white transition-colors duration-300 hover:bg-[#726E58]"
               >
-                <div className="aspect-square w-full overflow-hidden">
-                  <Scene
-                    kind="artisan"
-                    tone={2}
-                    seed={5}
-                    image="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=800&q=85"
-                    alt="Kipusa Prints services"
-                  />
-                </div>
-                <div className="p-3">
-                  <p className="eyebrow text-[9px] text-terracotta">
-                    Kipusa Prints
-                  </p>
-                  <p className="font-serif text-sm text-charcoal group-hover:text-forest sm:text-base">
-                    Printing, Design &amp; DHL
-                  </p>
-                </div>
-              </Link>
-
-              <Link
-                href="/collections/kipusa-home"
-                className="group overflow-hidden rounded-2xl border border-sand bg-white shadow-sm transition-colors hover:border-forest"
-              >
-                <div className="aspect-square w-full overflow-hidden">
-                  <Scene
-                    kind="candle"
-                    tone={0}
-                    seed={7}
-                    image="https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=800&q=85"
-                    alt="Kipusa Home candles and lifestyle essentials"
-                  />
-                </div>
-                <div className="p-3">
-                  <p className="eyebrow text-[9px] text-olive">Kipusa Home</p>
-                  <p className="font-serif text-sm text-charcoal group-hover:text-forest sm:text-base">
-                    Candles &amp; Home Care
-                  </p>
-                </div>
+                {s.cta}
               </Link>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Bottom-Right Circular Pagination Dots (Matching Screenshot) */}
+      <div className="absolute bottom-7 right-6 flex items-center gap-3 md:bottom-10 md:right-12">
+        {slides.map((_, n) => (
+          <button
+            key={n}
+            type="button"
+            aria-label={`Go to slide ${n + 1}`}
+            onClick={() => setI(n)}
+            className={`h-2.5 w-2.5 rounded-full border border-white transition-all duration-300 ${
+              n === i
+                ? "bg-white scale-110"
+                : "bg-transparent opacity-75 hover:opacity-100"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
