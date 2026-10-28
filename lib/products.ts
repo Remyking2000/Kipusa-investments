@@ -1,10 +1,18 @@
 import type { SceneKind } from "@/components/Scene";
 
+export type BusinessSectionSlug =
+  | "kipusa-beauty"
+  | "kipusa-prints"
+  | "kipusa-home";
+
 export type Variant = { label: string; price: number };
+
 export type Product = {
   slug: string;
   name: string;
   sub: string;
+  section: BusinessSectionSlug;
+  sectionLabel: "Kipusa Beauty" | "Kipusa Prints" | "Kipusa Home";
   category: string;
   scene: SceneKind;
   tone: number;
@@ -12,493 +20,564 @@ export type Product = {
   hoverImage: string;
   gallery: string[];
   badge?: string;
+  actionType?: "cart" | "inquiry";
+  isPlaceholder: boolean;
   variants: Variant[];
-  rating: number;
-  reviews: number;
   description: string;
-  ingredients: string;
+  details: string;
 };
 
 export type Collection = {
   slug: string;
   name: string;
+  shortName: string;
+  tagline: string;
   blurb: string;
+  subcategories: string[];
   scene: SceneKind;
   tone: number;
   image: string;
+  ctaLabel: string;
 };
 
 export const collections: Collection[] = [
   {
-    slug: "bath-body-skincare",
-    name: "Bath, Body & Skincare",
-    blurb: "Lotions, facial oils, washes and whipped butters made with shea, macadamia and wild East African botanicals.",
+    slug: "kipusa-beauty",
+    name: "Kipusa Beauty",
+    shortName: "Beauty",
+    tagline: "Botanical Skincare & Personal Care",
+    blurb:
+      "Nourishing facial oils, exfoliating scrubs, whipped body butters, and gentle hair and skin essentials formulated for everyday rituals.",
+    subcategories: [
+      "Facial Oils & Serums",
+      "Body Scrubs & Polishes",
+      "Body Butters & Lotions",
+      "Hair & Scalp Care",
+    ],
     scene: "bottle",
     tone: 1,
-    image: "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=1200&q=85",
+    image:
+      "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=1200&q=85",
+    ctaLabel: "Explore Kipusa Beauty",
   },
   {
-    slug: "hair-care",
-    name: "Hair Care",
-    blurb: "Botanical shampoos, conditioning masks and scalp elixirs for crown and strand, free of harsh sulphates.",
-    scene: "bottle",
-    tone: 3,
-    image: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=1200&q=85",
+    slug: "kipusa-prints",
+    name: "Kipusa Prints",
+    shortName: "Prints",
+    tagline: "Custom Print, Packaging & Brand Collateral",
+    blurb:
+      "Bespoke product packaging, cosmetic labels, corporate stationery, lookbooks, and promotional print production tailored to growing brands.",
+    subcategories: [
+      "Packaging & Product Labels",
+      "Corporate Stationery",
+      "Editorial & Lookbooks",
+      "Retail & Event Signage",
+    ],
+    scene: "artisan",
+    tone: 2,
+    image:
+      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1200&q=85",
+    ctaLabel: "Explore Kipusa Prints",
   },
   {
-    slug: "soaps",
-    name: "All-natural Soaps",
-    blurb: "Cold-process botanical bars, cut and cured by hand for six weeks in small artisan batches.",
-    scene: "soap",
-    tone: 0,
-    image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=1200&q=85",
-  },
-  {
-    slug: "candles",
-    name: "Hand-poured Candles",
-    blurb: "Soy and beeswax candles scented with the wild grasses, resins and woods of the savanna.",
+    slug: "kipusa-home",
+    name: "Kipusa Home",
+    shortName: "Home",
+    tagline: "Home Fragrance, Living & Everyday Care",
+    blurb:
+      "Hand-poured scented candles, botanical room sprays, cold-process soaps, and thoughtful lifestyle pieces designed for calm, welcoming spaces.",
+    subcategories: [
+      "Scented Candles",
+      "Room & Linen Mists",
+      "Artisan Bar Soaps",
+      "Surface & Home Care",
+    ],
     scene: "candle",
-    tone: 2,
-    image: "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1200&q=85",
-  },
-  {
-    slug: "gift-kits",
-    name: "Gift Kits",
-    blurb: "Considered self-care sets, wrapped in recycled cotton paper and handwoven kanga cloth.",
-    scene: "soap",
-    tone: 4,
-    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-  },
-  {
-    slug: "home-care",
-    name: "Home Care",
-    blurb: "Everyday botanical surface sprays and hand washes, kind to hands and to water.",
-    scene: "bottle",
-    tone: 2,
-    image: "https://images.unsplash.com/photo-1585232351009-aa87416fca90?auto=format&fit=crop&w=1200&q=85",
+    tone: 0,
+    image:
+      "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1200&q=85",
+    ctaLabel: "Explore Kipusa Home",
   },
 ];
 
 export const products: Product[] = [
-  {
-    slug: "natural-soap-aloe-avocado",
-    name: "Natural Soap",
-    sub: "Aloe + Avocado",
-    category: "soaps",
-    scene: "soap",
-    tone: 0,
-    badge: "Best Seller",
-    image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [
-      { label: "120g bar", price: 980 },
-      { label: "Set of 3", price: 2700 },
-    ],
-    rating: 4.9,
-    reviews: 62,
-    description:
-      "A gentle bar cured for six weeks. Cool Rift Valley aloe and cold-pressed avocado oil leave skin soft, calm and never tight.",
-    ingredients:
-      "Saponified olive, coconut and avocado oils, fresh aloe vera leaf juice, unrefined shea butter, essential oils.",
-  },
+  // ============================================================================
+  // 1. KIPUSA BEAUTY (Oils, Scrubs, Body Butters, Cleansers, Hair Care)
+  // ============================================================================
   {
     slug: "rosehip-baobab-facial-oil",
-    name: "Radiance Facial Oil",
-    sub: "Rosehip + Baobab",
-    category: "bath-body-skincare",
+    name: "Botanical Radiance Facial Oil",
+    sub: "Rosehip & Baobab Oil Blend",
+    section: "kipusa-beauty",
+    sectionLabel: "Kipusa Beauty",
+    category: "Facial Oils & Serums",
     scene: "bottle",
     tone: 1,
-    badge: "Best Seller",
-    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=900&q=85",
+    badge: "Kipusa Beauty",
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=900&q=85",
     gallery: [
       "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1100&q=85",
       "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=1100&q=85",
       "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=1100&q=85",
     ],
     variants: [
-      { label: "30ml dropper", price: 2450 },
-      { label: "50ml dropper", price: 3600 },
+      { label: "30ml Dropper", price: 1850 },
+      { label: "50ml Dropper", price: 2650 },
     ],
-    rating: 5.0,
-    reviews: 74,
     description:
-      "A silky, dry-touch facial elixir cold-pressed from wild rosehip seeds and coastal Kenyan baobab oil. Restores a supple, sunlit glow morning and evening.",
-    ingredients:
-      "Rosa Canina (Rosehip) Seed Oil, Adansonia Digitata (Baobab) Seed Oil, Simmondsia Chinensis (Jojoba) Oil, Tocopherol (Vitamin E), Pelargonium Graveolens Flower Oil.",
+      "A lightweight, fast-absorbing facial oil formulated with cold-pressed rosehip and baobab oils for daily moisture and a soft, natural glow. (Phase 1 sample catalogue item.)",
+    details:
+      "Sample specification: Cold-pressed botanical oil blend in UV-protective amber glass dropper bottle. Ready to be updated with final Kipusa Beauty SKU details.",
   },
   {
-    slug: "lotion-palmarosa-shea-macadamia",
-    name: "Body Lotion",
-    sub: "Palmarosa + Shea + Macadamia",
-    category: "bath-body-skincare",
-    scene: "bottle",
-    tone: 1,
-    badge: "Customer Favourite",
-    image: "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=900&q=85",
+    slug: "honey-oat-exfoliating-scrub",
+    name: "Gentle Exfoliating Body & Face Scrub",
+    sub: "Colloidal Oat & Raw Honey Polish",
+    section: "kipusa-beauty",
+    sectionLabel: "Kipusa Beauty",
+    category: "Body Scrubs & Polishes",
+    scene: "soap",
+    tone: 2,
+    badge: "Kipusa Beauty",
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=85",
     gallery: [
-      "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=1100&q=85",
       "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=1100&q=85",
     ],
     variants: [
-      { label: "250ml", price: 3000 },
-      { label: "500ml", price: 5200 },
+      { label: "150g Glass Jar", price: 1450 },
+      { label: "250g Glass Jar", price: 2100 },
     ],
-    rating: 5.0,
-    reviews: 88,
     description:
-      "A rich yet quick-absorbing body lotion, made with raw shea from northern Kenya and cold-pressed macadamia from the central highlands.",
-    ingredients:
-      "Shea butter, macadamia integrifolia seed oil, palmarosa essential oil, aloe barbadensis leaf juice, vitamin E.",
+      "Finely milled oat kernel and botanical oils gently buff away surface dryness, leaving skin smooth and comfortable. (Phase 1 sample catalogue item.)",
+    details:
+      "Sample specification: Gentle cream-to-milk exfoliating scrub. Placeholder entry for Kipusa Beauty catalogue.",
   },
   {
-    slug: "whipped-nilotica-shea-butter",
-    name: "Whipped Body Butter",
-    sub: "Nilotica Shea + Vanilla Bean",
-    category: "bath-body-skincare",
+    slug: "whipped-shea-body-butter",
+    name: "Velvet Whipped Body Butter",
+    sub: "Shea Butter & Sweet Almond",
+    section: "kipusa-beauty",
+    sectionLabel: "Kipusa Beauty",
+    category: "Body Butters & Lotions",
     scene: "bottle",
     tone: 4,
-    badge: "New",
-    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=85",
+    badge: "Kipusa Beauty",
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=900&q=85",
     gallery: [
       "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=1100&q=85",
       "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=1100&q=85",
     ],
     variants: [
-      { label: "200g glass jar", price: 2650 },
-      { label: "400g atelier jar", price: 4600 },
+      { label: "200g Jar", price: 1750 },
+      { label: "350g Jar", price: 2800 },
     ],
-    rating: 4.9,
-    reviews: 54,
     description:
-      "Cloud-whipped East African Nilotica shea butter blended with marula oil and cured Madagascar vanilla pods. Melts on contact with warm skin.",
-    ingredients:
-      "Butyrospermum Parkii (Nilotica Shea) Butter, Sclerocarya Birrea (Marula) Oil, Prunus Amygdalus Dulcis Oil, Vanilla Planifolia Fruit Extract, Tocopherol.",
+      "Rich, airy whipped shea body butter that melts smoothly into warm skin after a bath or shower for lasting softness. (Phase 1 sample catalogue item.)",
+    details:
+      "Sample specification: Unrefined shea butter and sweet almond oil blend in wide-mouth jar. Placeholder entry for Kipusa Beauty.",
+  },
+  {
+    slug: "golden-botanical-body-oil",
+    name: "Nourishing Botanical Body Oil",
+    sub: "Marula, Jojoba & Sweet Orange",
+    section: "kipusa-beauty",
+    sectionLabel: "Kipusa Beauty",
+    category: "Facial Oils & Serums",
+    scene: "bottle",
+    tone: 2,
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=900&q=85",
+    gallery: [
+      "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=1100&q=85",
+    ],
+    variants: [
+      { label: "100ml Pump Bottle", price: 1950 },
+      { label: "200ml Pump Bottle", price: 3200 },
+    ],
+    description:
+      "A satin-finish body oil designed to lock in moisture immediately after showering while leaving a delicate citrus-botanical scent. (Phase 1 sample catalogue item.)",
+    details:
+      "Sample specification: Cold-pressed botanical body oil with pump dispenser. Placeholder entry for Kipusa Beauty.",
+  },
+  {
+    slug: "rosemary-moringa-hair-oil",
+    name: "Nourishing Scalp & Hair Oil",
+    sub: "Rosemary, Moringa & Castor Oil",
+    section: "kipusa-beauty",
+    sectionLabel: "Kipusa Beauty",
+    category: "Hair & Scalp Care",
+    scene: "bottle",
+    tone: 3,
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=900&q=85",
+    gallery: [
+      "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=1100&q=85",
+    ],
+    variants: [
+      { label: "50ml Pipette", price: 1550 },
+      { label: "100ml Pipette", price: 2500 },
+    ],
+    description:
+      "A soothing pre-wash scalp and hair conditioning oil formulated with moringa, castor, and rosemary leaf oil. (Phase 1 sample catalogue item.)",
+    details:
+      "Sample specification: Pipette applicator bottle for scalp and hair care rituals. Placeholder entry for Kipusa Beauty.",
+  },
+  {
+    slug: "raw-cane-sugar-body-scrub",
+    name: "Botanical Sugar Body Scrub",
+    sub: "Raw Cane Sugar & Shea Oil",
+    section: "kipusa-beauty",
+    sectionLabel: "Kipusa Beauty",
+    category: "Body Scrubs & Polishes",
+    scene: "soap",
+    tone: 1,
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=900&q=85",
+    gallery: [
+      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1100&q=85",
+    ],
+    variants: [{ label: "250g Jar", price: 1600 }],
+    description:
+      "Exfoliating sugar crystals suspended in whipped plant oils to polish rough skin and rinse clean with warm water. (Phase 1 sample catalogue item.)",
+    details:
+      "Sample specification: 250g body scrub jar. Placeholder entry for Kipusa Beauty.",
+  },
+
+  // ============================================================================
+  // 2. KIPUSA PRINTS (Packaging, Labels, Stationery, Editorial, Signage)
+  // ============================================================================
+  {
+    slug: "custom-product-labels-packaging",
+    name: "Custom Product Labels & Sleeves",
+    sub: "Textured Cotton, Matte & Foil Stamped Rolls",
+    section: "kipusa-prints",
+    sectionLabel: "Kipusa Prints",
+    category: "Packaging & Product Labels",
+    scene: "artisan",
+    tone: 2,
+    badge: "Kipusa Prints",
+    actionType: "inquiry",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=85",
+    gallery: [
+      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1100&q=85",
+    ],
+    variants: [
+      { label: "Starter Run (250 Labels)", price: 4500 },
+      { label: "Standard Run (500 Labels)", price: 7800 },
+      { label: "Commercial Run (1,000 Labels)", price: 13500 },
+    ],
+    description:
+      "Water- and oil-resistant custom die-cut labels and carton sleeves ideal for skincare bottles, jars, candles, and gourmet packaging. Available for direct pack ordering or custom quote inquiry. (Phase 1 sample print service.)",
+    details:
+      "Sample specification: Matte laminated, uncoated textured stock, or metallic foil finishes. Custom dielines supported.",
+  },
+  {
+    slug: "bespoke-rigid-gift-boxes",
+    name: "Branded Packaging & Gift Boxes",
+    sub: "Custom Printed Folding Cartons & Mailer Boxes",
+    section: "kipusa-prints",
+    sectionLabel: "Kipusa Prints",
+    category: "Packaging & Product Labels",
+    scene: "artisan",
+    tone: 4,
+    badge: "Kipusa Prints",
+    actionType: "inquiry",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=900&q=85",
+    gallery: [
+      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1100&q=85",
+    ],
+    variants: [
+      { label: "50 Custom Boxes", price: 8500 },
+      { label: "100 Custom Boxes", price: 15000 },
+      { label: "250 Custom Boxes", price: 32000 },
+    ],
+    description:
+      "Sturdy, custom-printed product boxes and e-commerce presentation mailers with optional tissue paper and insert dividers. (Phase 1 sample print service.)",
+    details:
+      "Sample specification: 350gsm–400gsm kraft or ivory board with custom full-colour or single-ink branding.",
+  },
+  {
+    slug: "executive-stationery-suite",
+    name: "Corporate & Boutique Stationery Suite",
+    sub: "Business Cards, Thank-You Notes & Letterheads",
+    section: "kipusa-prints",
+    sectionLabel: "Kipusa Prints",
+    category: "Corporate Stationery",
+    scene: "texture",
+    tone: 0,
+    badge: "Kipusa Prints",
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=900&q=85",
+    gallery: [
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1100&q=85",
+    ],
+    variants: [
+      { label: "100 Cards + Notes Pack", price: 3200 },
+      { label: "250 Cards + Notes Pack", price: 6400 },
+    ],
+    description:
+      "Heavyweight textured business cards, order enclosure thank-you cards, and branded stationery printed on archival paper stocks. (Phase 1 sample print service.)",
+    details:
+      "Sample specification: 350gsm–600gsm uncoated cotton and warm cream card stocks.",
+  },
+  {
+    slug: "editorial-lookbooks-catalogues",
+    name: "Lookbooks, Brochures & Brand Booklets",
+    sub: "Saddle-Stitched & Perfect-Bound Print Runs",
+    section: "kipusa-prints",
+    sectionLabel: "Kipusa Prints",
+    category: "Editorial & Lookbooks",
+    scene: "artisan",
+    tone: 1,
+    actionType: "inquiry",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85",
+    gallery: [
+      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1100&q=85",
+    ],
+    variants: [
+      { label: "50 Booklets (16 Pages)", price: 9500 },
+      { label: "100 Booklets (16 Pages)", price: 16800 },
+    ],
+    description:
+      "High-resolution editorial lookbooks, product catalogues, and event programmes printed with rich colour accuracy. (Phase 1 sample print service.)",
+    details:
+      "Sample specification: A5 or A4 portrait/landscape formats on silk or uncoated art paper.",
+  },
+  {
+    slug: "retail-display-event-signage",
+    name: "Retail Display & Event Signage Kit",
+    sub: "Tabletop Menus, Pull-Up Banners & POS Cards",
+    section: "kipusa-prints",
+    sectionLabel: "Kipusa Prints",
+    category: "Retail & Event Signage",
+    scene: "texture",
+    tone: 3,
+    actionType: "inquiry",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=900&q=85",
+    gallery: [
+      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1100&q=85",
+    ],
+    variants: [
+      { label: "Pop-Up Booth Signage Pack", price: 11500 },
+      { label: "Full Retail Display Bundle", price: 22000 },
+    ],
+    description:
+      "Cohesive point-of-sale counter cards, exhibition banners, and branded signage designed for pop-ups, markets, and retail shelves. (Phase 1 sample print service.)",
+    details:
+      "Sample specification: Custom-sized display boards, strut cards, and wide-format banners.",
+  },
+
+  // ============================================================================
+  // 3. KIPUSA HOME (Candles, Room Mists, Soaps, Lifestyle & Home Care)
+  // ============================================================================
+  {
+    slug: "wild-grasses-candle",
+    name: "Botanical Soy Scented Candle",
+    sub: "Warm Grasses, Cedar & Vetiver",
+    section: "kipusa-home",
+    sectionLabel: "Kipusa Home",
+    category: "Scented Candles",
+    scene: "candle",
+    tone: 2,
+    badge: "Kipusa Home",
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=85",
+    gallery: [
+      "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1100&q=85",
+    ],
+    variants: [
+      { label: "200g Single Wick", price: 2400 },
+      { label: "450g Double Wick", price: 4600 },
+    ],
+    description:
+      "A clean-burning soy wax candle poured into a reusable vessel, filling living spaces with grounded notes of cedar, vetiver, and warm amber. (Phase 1 sample catalogue item.)",
+    details:
+      "Sample specification: Soy wax blend with unbleached cotton wick. Placeholder entry for Kipusa Home.",
+  },
+  {
+    slug: "botanical-linen-room-mist",
+    name: "Botanical Room & Linen Mist",
+    sub: "Lemongrass, Eucalyptus & White Tea",
+    section: "kipusa-home",
+    sectionLabel: "Kipusa Home",
+    category: "Room & Linen Mists",
+    scene: "bottle",
+    tone: 0,
+    badge: "Kipusa Home",
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1585232351009-aa87416fca90?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=85",
+    gallery: [
+      "https://images.unsplash.com/photo-1585232351009-aa87416fca90?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1100&q=85",
+    ],
+    variants: [{ label: "150ml Glass Atomizer", price: 1650 }],
+    description:
+      "Refresh bedding, curtains, and living spaces with a fine mist of crisp lemongrass, eucalyptus leaf, and soft herbal notes. (Phase 1 sample catalogue item.)",
+    details:
+      "Sample specification: 150ml amber glass spray bottle. Placeholder entry for Kipusa Home.",
+  },
+  {
+    slug: "natural-soap-aloe-avocado",
+    name: "Cold-Process Artisan Soap Bar",
+    sub: "Aloe Vera, Avocado & Olive Oil",
+    section: "kipusa-home",
+    sectionLabel: "Kipusa Home",
+    category: "Artisan Bar Soaps",
+    scene: "soap",
+    tone: 0,
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=900&q=85",
+    gallery: [
+      "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=1100&q=85",
+    ],
+    variants: [
+      { label: "120g Bar", price: 750 },
+      { label: "Set of 3 Bars", price: 2000 },
+    ],
+    description:
+      "Traditional cold-process soap bars for sink and bath, formulated with plant oils for a creamy, non-drying lather. (Phase 1 sample catalogue item.)",
+    details:
+      "Sample specification: 120g cured bar soap. Placeholder entry for Kipusa Home.",
   },
   {
     slug: "hand-wash-cedar-orange",
-    name: "Hand Wash",
-    sub: "Cedar + Orange",
-    category: "home-care",
+    name: "Botanical Foaming Hand Wash",
+    sub: "Sweet Orange Peel & Cedarwood",
+    section: "kipusa-home",
+    sectionLabel: "Kipusa Home",
+    category: "Surface & Home Care",
     scene: "bottle",
     tone: 2,
-    image: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1585232351009-aa87416fca90?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1585232351009-aa87416fca90?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [
-      { label: "300ml", price: 2000 },
-      { label: "500ml refill", price: 2800 },
-    ],
-    rating: 4.8,
-    reviews: 41,
-    description:
-      "A softly foaming wash with warm cedar and bright orange peel. Plant-derived cleansers, nothing stripping.",
-    ingredients:
-      "Coconut-derived cleansers, botanical glycerin, sweet orange peel oil, Himalayan cedarwood oil, aloe vera.",
-  },
-  {
-    slug: "shower-set",
-    name: "Shower Set",
-    sub: "Shampoo · Conditioner · Bodywash",
-    category: "gift-kits",
-    scene: "bottle",
-    tone: 3,
-    badge: "Gift Ready",
-    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [{ label: "Trio (3 × 300ml)", price: 5500 }],
-    rating: 4.7,
-    reviews: 29,
-    description:
-      "Our three shower essentials, together in a recycled-paper keepsake box. A gift that is easy to give and easy to love.",
-    ingredients: "Contains Rosemary + Baobab Shampoo (300ml), Conditioner (300ml), and Cedarwood + Basil Body Wash (300ml).",
-  },
-  {
-    slug: "body-wash-cedarwood-basil",
-    name: "Body Wash",
-    sub: "Cedarwood + Basil",
-    category: "bath-body-skincare",
-    scene: "bottle",
-    tone: 4,
-    image: "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=900&q=85",
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1585232351009-aa87416fca90?auto=format&fit=crop&w=900&q=85",
     gallery: [
       "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1585232351009-aa87416fca90?auto=format&fit=crop&w=1100&q=85",
     ],
     variants: [
-      { label: "300ml", price: 2000 },
-      { label: "500ml", price: 3200 },
+      { label: "300ml Dispenser", price: 1500 },
+      { label: "500ml Refill", price: 2200 },
     ],
-    rating: 4.8,
-    reviews: 53,
     description:
-      "Green, woody and grounding. A creamy low-lather botanical wash that cleanses without leaving skin dry.",
-    ingredients:
-      "Coconut-derived cleansers, glycerin, cedarwood oil, sweet basil leaf oil, aloe vera.",
+      "Gentle plant-based hand wash for kitchen and bath sinks, scented with bright orange peel and warm cedar. (Phase 1 sample catalogue item.)",
+    details:
+      "Sample specification: 300ml pump bottle and 500ml refill pouch. Placeholder entry for Kipusa Home.",
   },
   {
-    slug: "wild-grasses-candle",
-    name: "Wild Grasses Scented Candle",
-    sub: "Small tin",
-    category: "candles",
-    scene: "candle",
-    tone: 2,
-    badge: "Best Seller",
-    image: "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [{ label: "200g", price: 4500 }],
-    rating: 4.9,
-    reviews: 37,
-    description:
-      "Warm dry grass, pale musk and a thread of acacia smoke. Hand-poured in Nairobi, burns cleanly for 40 hours.",
-    ingredients: "100% pure soy wax, unbleached cotton wick, botanical fragrance and essential oils.",
-  },
-  {
-    slug: "wild-grasses-candle-large",
-    name: "Wild Grasses Scented Candle",
-    sub: "Large vessel",
-    category: "candles",
-    scene: "candle",
-    tone: 0,
-    image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [{ label: "600g (3-Wick)", price: 10800 }],
-    rating: 5.0,
-    reviews: 19,
-    description:
-      "The same signature savanna scent in a larger, three-wick stoneware vessel crafted for open living spaces.",
-    ingredients: "Soy wax, three braided cotton wicks, botanical fragrance and essential oils.",
-  },
-  {
-    slug: "shampoo-conditioner-duo",
-    name: "Shampoo + Conditioner Duo",
-    sub: "Rosemary + Baobab",
-    category: "hair-care",
-    scene: "bottle",
-    tone: 3,
-    badge: "Best Seller",
-    image: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [{ label: "2 × 300ml", price: 3600 }],
-    rating: 4.8,
-    reviews: 47,
-    description:
-      "A restorative pairing for strong, shiny hair. Highland rosemary stimulates the scalp while cold-pressed baobab oil softens the lengths.",
-    ingredients: "Plant cleansers, cold-pressed baobab seed oil, rosemary leaf oil, aloe vera, pro-vitamin B5 (panthenol).",
-  },
-  {
-    slug: "moringa-rosemary-scalp-elixir",
-    name: "Botanical Scalp Elixir",
-    sub: "Moringa + Rosemary + Castor",
-    category: "hair-care",
-    scene: "bottle",
-    tone: 1,
-    badge: "New",
-    image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [
-      { label: "50ml pipette", price: 2100 },
-      { label: "100ml pipette", price: 3500 },
-    ],
-    rating: 4.9,
-    reviews: 34,
-    description:
-      "A nutrient-dense pre-wash scalp treatment and protective styling oil. Cold-pressed Kenyan moringa and black castor oil nourish dry roots.",
-    ingredients:
-      "Moringa Oleifera Seed Oil, Ricinus Communis (Castor) Oil, Rosmarinus Officinalis Leaf Oil, Mentha Piperita Oil, Tocopherol.",
-  },
-  {
-    slug: "hibiscus-marula-hair-mask",
-    name: "Deep Conditioning Hair Mask",
-    sub: "Hibiscus + Marula Butter",
-    category: "hair-care",
-    scene: "bottle",
-    tone: 4,
-    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [{ label: "250g jar", price: 2850 }],
-    rating: 4.9,
-    reviews: 41,
-    description:
-      "A rich, high-slip conditioning mask infused with crushed hibiscus petals, raw shea and marula oil to detangle and restore curl elasticity.",
-    ingredients:
-      "Aqua, Butyrospermum Parkii Butter, Sclerocarya Birrea Seed Oil, Hibiscus Sabdariffa Flower Extract, Cetearyl Alcohol, Panthenol.",
-  },
-  {
-    slug: "honey-oat-face-polish",
-    name: "Gentle Face Polish",
-    sub: "Wild Honey + Colloidal Oat",
-    category: "bath-body-skincare",
-    scene: "soap",
-    tone: 2,
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [{ label: "100g glass jar", price: 1950 }],
-    rating: 4.8,
-    reviews: 39,
-    description:
-      "Finely milled colloidal oat flour and raw acacia honey buff away surface dryness, transforming into a soothing milky veil upon rinsing.",
-    ingredients:
-      "Avena Sativa (Oat) Kernel Flour, Prunus Amygdalus Dulcis Oil, Mel (Wildflower Honey), Butyrospermum Parkii Butter, Tocopherol.",
-  },
-  {
-    slug: "pink-clay-rosewater-soap",
-    name: "Artisan Soap Bar",
-    sub: "Rift Clay + Rose Geranium",
-    category: "soaps",
-    scene: "soap",
-    tone: 2,
-    badge: "New",
-    image: "https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [
-      { label: "120g bar", price: 980 },
-      { label: "Set of 3", price: 2700 },
-    ],
-    rating: 4.9,
-    reviews: 28,
-    description:
-      "Swirled with mineral-rich pink clay and scented with steam-distilled Kenyan rose geranium. Creates a creamy, velvety lather for face and body.",
-    ingredients:
-      "Saponified shea butter, olive and coconut oils, kaolin rose clay, pelargonium graveolens (rose geranium) oil.",
-  },
-  {
-    slug: "acacia-vetiver-candle",
-    name: "Dusk Vetiver Scented Candle",
-    sub: "Amber Glass Vessel",
-    category: "candles",
+    slug: "amber-vessel-reed-diffuser",
+    name: "Botanical Reed Diffuser Set",
+    sub: "Sandalwood, Fig & Warm Clove",
+    section: "kipusa-home",
+    sectionLabel: "Kipusa Home",
+    category: "Home Fragrance",
     scene: "candle",
     tone: 4,
-    image: "https://images.unsplash.com/photo-1572726729207-a78d6feb18d7?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=900&q=85",
+    actionType: "cart",
+    isPlaceholder: true,
+    image:
+      "https://images.unsplash.com/photo-1572726729207-a78d6feb18d7?auto=format&fit=crop&w=900&q=85",
+    hoverImage:
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=85",
     gallery: [
       "https://images.unsplash.com/photo-1572726729207-a78d6feb18d7?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [{ label: "240g", price: 4900 }],
-    rating: 4.9,
-    reviews: 31,
-    description:
-      "Earthy vetiver root after rain, warm frankincense resin and wild acacia honey. Poured into reusable amber apothecary glass.",
-    ingredients: "Soy and beeswax blend, cotton wick, vetiver root oil, Boswellia carterii oil.",
-  },
-  {
-    slug: "savanna-gift-kit",
-    name: "Savanna Gift Kit",
-    sub: "Soap · Lotion · Candle",
-    category: "gift-kits",
-    scene: "soap",
-    tone: 4,
-    badge: "Best Seller",
-    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1100&q=85",
       "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1100&q=85",
     ],
-    variants: [{ label: "3-Piece Kit", price: 7800 }],
-    rating: 4.9,
-    reviews: 22,
+    variants: [{ label: "150ml + Rattan Reeds", price: 2650 }],
     description:
-      "A cold-process bar of soap, a full-size bottle of shea lotion and a small Wild Grasses candle, hand-wrapped in traditional kanga cloth.",
-    ingredients: "Includes Natural Soap (120g), Body Lotion (250ml), and Wild Grasses Candle (200g).",
-  },
-  {
-    slug: "complete-savanna-ritual-trunk",
-    name: "The Sanctuary Ritual Box",
-    sub: "Facial Oil · Body Butter · Soap · Candle",
-    category: "gift-kits",
-    scene: "soap",
-    tone: 1,
-    badge: "Limited Edition",
-    image: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [{ label: "4-Piece Collector Box", price: 9600 }],
-    rating: 5.0,
-    reviews: 18,
-    description:
-      "Our most generous gifting ritual. Combines the Radiance Facial Oil, Whipped Nilotica Shea Butter, Rift Clay Soap and Dusk Vetiver Candle.",
-    ingredients: "See individual full-size products.",
-  },
-  {
-    slug: "kitchen-surface-spray",
-    name: "Surface Spray",
-    sub: "Lemongrass + Thyme",
-    category: "home-care",
-    scene: "bottle",
-    tone: 0,
-    image: "https://images.unsplash.com/photo-1585232351009-aa87416fca90?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1585232351009-aa87416fca90?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [
-      { label: "500ml glass spray", price: 1600 },
-      { label: "1L refill bottle", price: 2600 },
-    ],
-    rating: 4.6,
-    reviews: 15,
-    description:
-      "A plant-based botanical spray for stone, wood and kitchen counters. Crisp East African lemongrass and garden thyme.",
-    ingredients: "Plant-derived surfactants, distilled water, organic lemongrass and thyme essential oils.",
+      "Continuous, flame-free scent diffusion presented in a minimalist glass apothecary bottle with natural rattan reeds. (Phase 1 sample catalogue item.)",
+    details:
+      "Sample specification: 150ml diffuser vessel with 8 rattan reeds. Placeholder entry for Kipusa Home.",
   },
 ];
 
 export const featured = products.slice(0, 8);
-export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
-export const getCollection = (slug: string) => collections.find((c) => c.slug === slug);
-export const fromPrice = (p: Product) => Math.min(...p.variants.map((v) => v.price));
+
+export const getProductsBySection = (section: BusinessSectionSlug) =>
+  products.filter((p) => p.section === section);
+
+export const getProduct = (slug: string) =>
+  products.find((p) => p.slug === slug);
+
+export const getCollection = (slug: string) =>
+  collections.find((c) => c.slug === slug);
+
+export const fromPrice = (p: Product) =>
+  Math.min(...p.variants.map((v) => v.price));
+
 export const formatKSh = (n: number) => "KSh " + n.toLocaleString("en-KE");
+
 export const fullName = (p: Product) =>
-  p.sub && !p.name.includes("Candle") ? `${p.name}: ${p.sub}` : p.name;
+  p.sub ? `${p.name} — ${p.sub}` : p.name;

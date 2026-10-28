@@ -2,33 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
-html { scroll-behavior: smooth; }
-body { @apply bg-cream font-sans text-charcoal antialiased; font-weight: 300; }
-::selection { background: #7A7B54; color: #F6F1E7; }
-
-@layer components {
-  .eyebrow { @apply font-sans text-[11px] uppercase tracking-eyebrow; font-weight: 400; }
-  .display { @apply font-serif; font-weight: 300; line-height: 1.02; letter-spacing: -0.015em; }
-  .h-xl { font-size: clamp(2.8rem, 7.2vw, 7rem); }
-  .h-lg { font-size: clamp(2.3rem, 5vw, 4.8rem); }
-  .h-md { font-size: clamp(1.8rem, 3.2vw, 3rem); }
-  .wrap { @apply mx-auto w-full px-5 md:px-10 lg:px-14; max-width: 1680px; }
-  .section { @apply py-[72px] md:py-[120px] lg:py-[160px]; }
-  .btn {
-    @apply inline-flex items-center justify-center border px-9 py-[14px] text-[11px] uppercase tracking-btn transition-colors duration-500 ease-soft;
-    font-weight: 400;
-  }
-  .btn-dark { @apply border-forest bg-forest text-cream hover:bg-transparent hover:text-forest; }
-  .btn-line { @apply border-current bg-transparent hover:bg-cream hover:text-forest hover:border-cream; }
-  .btn-line-dark { @apply border-charcoal/70 hover:bg-charcoal hover:text-cream; }
-  .link-u { @apply relative inline-block text-[11px] uppercase tracking-btn; font-weight: 400; }
-  .link-u::after { content: ""; @apply absolute -bottom-1 left-0 h-px w-full origin-left bg-current transition-transform duration-500 ease-soft; }
-  .link-u:hover::after { transform: scaleX(0.35); }
-  .zoom img, .zoom svg.zoomable { transition: transform 1.4s cubic-bezier(0.22, 0.61, 0.36, 1); }
-  .zoom:hover .zoomable { transform: scale(1.05); }
+html {
+  scroll-behavior: smooth;
 }
 
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+body {
+  @apply bg-cream font-sans text-charcoal antialiased;
+  font-weight: 400;
+  overflow-x: hidden;
+}
 
-@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+::selection {
+  background: #2C3E33;
+  color: #FAF7F2;
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-sans text-[11px] uppercase tracking-eyebrow font-medium;
+  }
+  .display {
+    @apply font-serif font-normal leading-[1.08] tracking-[-0.01em];
+  }
+  .h-xl {
+    font-size: clamp(2.25rem, 5.2vw, 4.75rem);
+  }
+  .h-lg {
+    font-size: clamp(1.85rem, 3.8vw, 3.5rem);
+  }
+  .h-md {
+    font-size: clamp(1.5rem, 2.6vw, 2.35rem);
+  }
+  .wrap {
+    @apply mx-auto w-full px-4 sm:px-6 md:px-10 lg:px-14;
+    max-width: 1440px;
+  }
+  .section {
+    @apply py-14 md:py-20 lg:py-24;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg border px-6 py-3.5 text-[11px] font-medium uppercase tracking-btn transition-all duration-300;
+  }
+  .btn-dark {
+    @apply border-forest bg-forest text-cream hover:bg-forest/90 shadow-sm;
+  }
+  .btn-line {
+    @apply border-cream bg-cream/10 text-cream backdrop-blur-sm hover:bg-cream hover:text-forest;
+  }
+  .btn-line-dark {
+    @apply border-charcoal/30 bg-white text-charcoal hover:border-forest hover:bg-forest hover:text-cream;
+  }
+  .link-u {
+    @apply relative inline-block text-[11px] font-medium uppercase tracking-btn;
+  }
+  .link-u::after {
+    content: "";
+    @apply absolute -bottom-1 left-0 h-px w-full origin-left bg-current transition-transform duration-300;
+  }
+  .link-u:hover::after {
+    transform: scaleX(0.4);
+  }
+  .zoom img,
+  .zoom svg.zoomable {
+    transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .zoom:hover .zoomable {
+    transform: scale(1.04);
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

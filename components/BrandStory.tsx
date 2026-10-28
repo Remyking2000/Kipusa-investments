@@ -1,21 +1,32 @@
 import Link from "next/link";
-import { Reveal, Stagger } from "./Reveal";
 
 export default function BrandStory() {
   return (
-    <section className="section bg-beige">
-      <div className="wrap grid gap-12 md:grid-cols-12">
-        <div className="md:col-span-2"><Reveal><p className="eyebrow text-olive">Our belief</p></Reveal></div>
-        <div className="md:col-span-7 md:col-start-4">
-          <h2 className="display h-xl"><Stagger text="A different way of doing business" /></h2>
+    <section className="section border-y border-sand bg-beige/55">
+      <div className="wrap grid items-center gap-8 md:grid-cols-12 md:gap-12">
+        <div className="md:col-span-5">
+          <p className="eyebrow mb-3 text-olive">About Kipusa Limited</p>
+          <h2 className="display h-lg text-charcoal">
+            One brand family across personal care, print &amp; home living.
+          </h2>
         </div>
-        <div className="md:col-span-4 md:col-start-8">
-          <Reveal delay={0.2}>
-            <p className="text-[15px] leading-[1.95] text-charcoal/75">
-              We believe products should be made well, and made in a way that empowers the people behind them. Every bar, bottle and candle is crafted in Kenya by a growing team of artisans, using ingredients sourced fairly from local growers. Thirty percent of our profits are reinvested into community projects, from clean water to schooling.
-            </p>
-            <Link href="/about" className="link-u mt-10">Learn more</Link>
-          </Reveal>
+        <div className="md:col-span-7">
+          <p className="text-base leading-relaxed text-charcoal/80">
+            <strong>Kipusa Limited</strong> brings together three complementary
+            business sections under one cohesive roof:{" "}
+            <strong>Kipusa Beauty</strong> for botanical skincare and personal
+            care, <strong>Kipusa Prints</strong> for custom packaging, labels,
+            and commercial print collateral, and <strong>Kipusa Home</strong>{" "}
+            for everyday home fragrance and lifestyle essentials.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-4">
+            <Link href="/about" className="btn btn-line-dark">
+              Learn About Kipusa
+            </Link>
+            <Link href="/contact" className="btn btn-dark">
+              Contact &amp; Inquiries
+            </Link>
+          </div>
         </div>
       </div>
     </section>

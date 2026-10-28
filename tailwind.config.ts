@@ -1,20 +1,38 @@
 import type { Config } from "tailwindcss";
+
 const config: Config = {
-  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
+  content: [
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./lib/**/*.{ts,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
-        cream: "#F6F1E7", beige: "#EBE2D0", sand: "#DCCFB5", sage: "#A5A78B",
-        olive: "#7A7B54", forest: "#2E3A2C", charcoal: "#2A2925", bark: "#4A3B2C", terracotta: "#A5543A",
+        cream: "#FAF7F2",
+        beige: "#F1ECE1",
+        sand: "#E2D9C8",
+        sage: "#8FA18E",
+        olive: "#5C6F5E",
+        forest: "#2C3E33",
+        charcoal: "#242421",
+        bark: "#4A3F35",
+        terracotta: "#9E583F",
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
-      letterSpacing: { eyebrow: "0.22em", btn: "0.18em" },
-      transitionTimingFunction: { soft: "cubic-bezier(0.22, 0.61, 0.36, 1)" },
+      letterSpacing: {
+        eyebrow: "0.18em",
+        btn: "0.14em",
+      },
+      transitionTimingFunction: {
+        soft: "cubic-bezier(0.22, 0.61, 0.36, 1)",
+      },
     },
   },
   plugins: [],
 };
+
 export default config;

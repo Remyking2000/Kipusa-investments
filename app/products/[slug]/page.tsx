@@ -7,13 +7,32 @@ export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
+export default function ProductPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const p = getProduct(params.slug);
   if (!p) notFound();
+
+  const related = products
+    .filter((x) => x.slug !== p.slug && x.section === p.section)
+    .concat(
+      products.filter((x) => x.slug !== p.slug && x.section !== p.section)
+    )
+    .slice(0, 4);
+
   return (
     <>
       <ProductDetail p={p} />
-      <ProductGrid title="You may also love" items={products.filter((x) => x.slug !== p.slug).slice(0, 4)} showLink={false} />
+      <ProductGrid
+        bg="bg-beige/45"
+        eyebrow={p.sectionLabel}
+        title={`More from ${p.sectionLabel}`}
+        items={related}
+        linkHref={`/collections/${p.section}`}
+        linkLabel={`View all ${p.sectionLabel}`}
+      />
     </>
   );
 }

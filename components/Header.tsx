@@ -1,129 +1,225 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Search, ShoppingBag, User, X, Instagram, Facebook, Twitter } from "lucide-react";
+import { Heart, Menu, Search, ShoppingBag, X, ArrowRight } from "lucide-react";
 import Logo from "./Logo";
 import { collections } from "@/lib/products";
 import { useStore } from "@/lib/store";
 
-const links = [
-  { href: "/collections/best-sellers", label: "Best Sellers" },
-  { href: "/shop", label: "Shop All", menu: true },
-  { href: "/collections/gift-kits", label: "Gifting" },
-  { href: "/contact", label: "Contact" },
-  { href: "/about", label: "Our Story" },
+const navLinks = [
+  { href: "/collections/kipusa-beauty", label: "Kipusa Beauty" },
+  { href: "/collections/kipusa-prints", label: "Kipusa Prints" },
+  { href: "/collections/kipusa-home", label: "Kipusa Home" },
+  { href: "/shop", label: "All Catalogue" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Inquiries" },
 ];
 
 export default function Header() {
-  const { count, setCartOpen, setSearchOpen } = useStore();
+  const pathname = usePathname();
+  const { count, wishlist, setCartOpen, setSearchOpen } = useStore();
   const [scrolled, setScrolled] = useState(false);
-  const [mega, setMega] = useState(false);
   const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 40);
+    const on = () => setScrolled(window.scrollY > 24);
     on();
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
+
   useEffect(() => {
     document.body.style.overflow = mobile ? "hidden" : "";
   }, [mobile]);
 
-  const icons = (
-    <div className="flex items-center gap-5">
-      <button aria-label="Search" onClick={() => setSearchOpen(true)} className="transition-opacity hover:opacity-60"><Search size={19} strokeWidth={1.2} /></button>
-      <Link href="/contact" aria-label="Account" className="hidden transition-opacity hover:opacity-60 md:block"><User size={19} strokeWidth={1.2} /></Link>
-      <button aria-label="Open bag" onClick={() => setCartOpen(true)} className="relative transition-opacity hover:opacity-60">
-        <ShoppingBag size={19} strokeWidth={1.2} />
-        {count > 0 && <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-forest text-[9px] text-cream">{count}</span>}
-      </button>
-    </div>
-  );
-
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-700 ease-soft ${scrolled ? "bg-cream/95 backdrop-blur-[2px] border-b border-sand/70" : "bg-cream border-b border-transparent"}`}
-      onMouseLeave={() => setMega(false)}
+      className={`sticky top-0 z-40 transition-all duration-300 ${
+        scrolled
+          ? "border-b border-sand/80 bg-cream/95 shadow-sm backdrop-blur-md"
+          : "border-b border-sand/50 bg-cream"
+      }`}
     >
-      <div className={`wrap grid grid-cols-3 items-center transition-all duration-700 ease-soft ${scrolled ? "h-[64px]" : "h-[84px] md:h-[104px]"}`}>
-        {/* left */}
-        <nav className="hidden items-center gap-5 lg:gap-9 md:flex">
-          {links.slice(0, 3).map((l) => (
-            <Link key={l.label} href={l.href} onMouseEnter={() => setMega(!!l.menu)} className="eyebrow relative whitespace-nowrap py-2 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-500 hover:after:scale-x-100">
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-        <button className="md:hidden" aria-label="Open menu" onClick={() => setMobile(true)}><Menu size={22} strokeWidth={1.2} /></button>
+      <div
+        className={`wrap flex items-center justify-between gap-4 transition-all duration-300 ${
+          scrolled ? "h-[68px]" : "h-[76px] md:h-[88px]"
+        }`}
+      >
+        {/* Left: Mobile Menu Button + Logo */}
+        <div className="flex items-center gap-3">
+          <button
+            className="-ml-2 rounded-lg p-2.5 text-charcoal transition-colors hover:bg-beige lg:hidden"
+            aria-label="Open navigation menu"
+            onClick={() => setMobile(true)}
+          >
+            <Menu size={22} strokeWidth={1.5} />
+          </button>
+          <Logo />
+        </div>
 
-        <div className="flex justify-center"><Logo /></div>
-
-        <div className="flex items-center justify-end gap-5 lg:gap-9">
-          <nav className="hidden items-center gap-5 lg:gap-9 md:flex">
-            {links.slice(3).map((l) => (
-              <Link key={l.label} href={l.href} onMouseEnter={() => setMega(false)} className="eyebrow relative whitespace-nowrap py-2 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-500 hover:after:scale-x-100">
+        {/* Center: Desktop Primary Navigation */}
+        <nav
+          aria-label="Main navigation"
+          className="hidden items-center gap-6 xl:gap-8 lg:flex"
+        >
+          {navLinks.map((l) => {
+            const active = pathname === l.href;
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`eyebrow relative whitespace-nowrap py-2 text-[11px] transition-colors ${
+                  active
+                    ? "text-forest font-semibold after:scale-x-100"
+                    : "text-charcoal/80 hover:text-forest after:scale-x-0 hover:after:scale-x-100"
+                } after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:w-full after:origin-left after:bg-forest after:transition-transform after:duration-300`}
+              >
                 {l.label}
               </Link>
-            ))}
-          </nav>
-          {icons}
+            );
+          })}
+        </nav>
+
+        {/* Right: Search, Wishlist, Cart */}
+        <div className="flex items-center gap-1.5 sm:gap-2.5">
+          <button
+            aria-label="Search catalogue"
+            onClick={() => setSearchOpen(true)}
+            className="flex items-center gap-2 rounded-lg px-2.5 py-2 text-charcoal transition-colors hover:bg-beige"
+          >
+            <Search size={19} strokeWidth={1.4} />
+            <span className="hidden text-xs font-medium text-charcoal/80 xl:inline">
+              Search
+            </span>
+          </button>
+
+          <Link
+            href="/wishlist"
+            aria-label={`Saved wishlist (${wishlist.length} items)`}
+            className="relative rounded-lg p-2.5 text-charcoal transition-colors hover:bg-beige"
+          >
+            <Heart
+              size={19}
+              strokeWidth={1.4}
+              className={
+                wishlist.length > 0 ? "fill-terracotta text-terracotta" : ""
+              }
+            />
+            {wishlist.length > 0 && (
+              <span className="absolute right-1 top-1 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-terracotta px-1 text-[9px] font-medium text-cream">
+                {wishlist.length}
+              </span>
+            )}
+          </Link>
+
+          <button
+            aria-label={`Open shopping bag (${count} items)`}
+            onClick={() => setCartOpen(true)}
+            className="relative flex items-center gap-2 rounded-lg bg-forest px-3.5 py-2 text-cream transition-colors hover:bg-forest/90"
+          >
+            <ShoppingBag size={17} strokeWidth={1.5} />
+            <span className="hidden text-[11px] font-medium uppercase tracking-wider sm:inline">
+              Bag
+            </span>
+            <span className="flex h-4 min-w-[16px] items-center justify-center rounded-full bg-cream px-1 text-[10px] font-semibold text-forest">
+              {count}
+            </span>
+          </button>
         </div>
       </div>
 
-      {/* shop dropdown */}
-      <AnimatePresence>
-        {mega && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.4 }}
-            className="absolute left-0 right-0 top-full hidden border-t border-sand/70 bg-cream md:block"
-          >
-            <div className="wrap grid grid-cols-4 gap-10 py-12">
-              <div>
-                <p className="eyebrow mb-5 text-olive">Shop</p>
-                <ul className="space-y-3 font-serif text-2xl">
-                  <li><Link onClick={() => setMega(false)} href="/shop" className="hover:text-olive">All Products</Link></li>
-                  <li><Link onClick={() => setMega(false)} href="/collections/best-sellers" className="hover:text-olive">Best Sellers</Link></li>
-                </ul>
-              </div>
-              <div className="col-span-2">
-                <p className="eyebrow mb-5 text-olive">Collections</p>
-                <ul className="grid grid-cols-2 gap-x-10 gap-y-3 font-serif text-2xl">
-                  {collections.map((c) => (
-                    <li key={c.slug}><Link onClick={() => setMega(false)} href={`/collections/${c.slug}`} className="hover:text-olive">{c.name}</Link></li>
-                  ))}
-                </ul>
-              </div>
-              <p className="font-serif text-xl italic text-bark/80">Made in small batches by artisans in Kenya. 30% of profits go to social good projects.</p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* mobile menu */}
+      {/* Mobile Menu Drawer */}
       <AnimatePresence>
         {mobile && (
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-50 flex flex-col bg-cream"
-          >
-            <div className="flex h-[84px] items-center justify-between px-5">
-              <button aria-label="Close menu" onClick={() => setMobile(false)}><X size={22} strokeWidth={1.2} /></button>
-              <Logo />
-              <span className="w-[22px]" />
-            </div>
-            <nav className="flex-1 overflow-y-auto px-8 pt-8">
-              {[{ href: "/", label: "Home" }, ...links, ...collections.map((c) => ({ href: `/collections/${c.slug}`, label: c.name, sub: true }))].map((l: { href: string; label: string; sub?: boolean }, i) => (
-                <motion.div key={l.label} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 + i * 0.045, duration: 0.7 }}>
-                  <Link href={l.href} onClick={() => setMobile(false)} className={l.sub ? "block py-1.5 font-serif text-xl text-bark/80" : "block py-2.5 font-serif text-4xl font-light"}>
-                    {l.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-            <div className="flex gap-6 px-8 py-8"><Instagram size={20} strokeWidth={1.2} /><Facebook size={20} strokeWidth={1.2} /><Twitter size={20} strokeWidth={1.2} /></div>
-          </motion.div>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 z-50 bg-charcoal/45 backdrop-blur-xs lg:hidden"
+              onClick={() => setMobile(false)}
+            />
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.3, ease: [0.22, 0.61, 0.36, 1] }}
+              className="fixed inset-y-0 left-0 z-50 flex w-[86%] max-w-sm flex-col justify-between bg-cream shadow-2xl lg:hidden"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation"
+            >
+              <div>
+                <div className="flex h-[76px] items-center justify-between border-b border-sand px-5">
+                  <Logo />
+                  <button
+                    aria-label="Close navigation menu"
+                    onClick={() => setMobile(false)}
+                    className="rounded-lg p-2 text-charcoal hover:bg-beige"
+                  >
+                    <X size={22} strokeWidth={1.5} />
+                  </button>
+                </div>
+
+                {/* Three Business Sections Highlight */}
+                <div className="border-b border-sand px-5 py-5">
+                  <p className="eyebrow mb-3 text-[10px] text-olive">
+                    Business Sections
+                  </p>
+                  <div className="space-y-2">
+                    {collections.map((c) => (
+                      <Link
+                        key={c.slug}
+                        href={`/collections/${c.slug}`}
+                        onClick={() => setMobile(false)}
+                        className="flex items-center justify-between rounded-xl border border-sand bg-white px-4 py-3 transition-colors hover:border-forest"
+                      >
+                        <div>
+                          <p className="font-serif text-lg font-medium text-charcoal">
+                            {c.name}
+                          </p>
+                          <p className="text-xs text-charcoal/65">{c.tagline}</p>
+                        </div>
+                        <ArrowRight size={16} className="text-forest" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Additional Navigation */}
+                <nav className="px-5 py-4">
+                  <ul className="divide-y divide-sand/60">
+                    {[
+                      { href: "/", label: "Home" },
+                      { href: "/shop", label: "Shop All Catalogue" },
+                      { href: "/wishlist", label: `Wishlist (${wishlist.length})` },
+                      { href: "/cart", label: `Shopping Bag (${count})` },
+                      { href: "/about", label: "About Kipusa Limited" },
+                      { href: "/contact", label: "Inquiries & Custom Orders" },
+                    ].map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          onClick={() => setMobile(false)}
+                          className="flex items-center justify-between py-3.5 text-sm font-medium text-charcoal hover:text-forest"
+                        >
+                          <span>{item.label}</span>
+                          <span className="text-charcoal/40">→</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
+
+              <div className="border-t border-sand bg-beige/60 px-5 py-4 text-xs text-charcoal/70">
+                Kipusa Limited — Phase 1 Storefront Preview
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

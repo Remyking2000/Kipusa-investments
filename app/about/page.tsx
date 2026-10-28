@@ -1,51 +1,88 @@
-import EditorialSection from "@/components/EditorialSection";
-import BrandStory from "@/components/BrandStory";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import Scene from "@/components/Scene";
+import { collections } from "@/lib/products";
 
-export const metadata = { title: "Our story — Organic Savanna" };
+export const metadata = {
+  title: "About Kipusa Limited — Kipusa Beauty, Kipusa Prints & Kipusa Home",
+};
 
 export default function About() {
   return (
-    <>
-      <section className="relative h-[70vh] min-h-[460px] overflow-hidden">
-        <Scene
-          kind="dusk"
-          tone={2}
-          seed={9}
-          image="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1800&q=85"
-          alt="Kenyan savanna at dusk"
-        />
-        <div className="absolute inset-0 bg-charcoal/30" />
-        <div className="wrap absolute inset-x-0 bottom-0 pb-16 text-cream md:pb-24">
-          <p className="eyebrow mb-5">Our story</p>
-          <h1 className="display h-xl uppercase">Rooted in Kenya</h1>
+    <div className="bg-cream">
+      {/* Header */}
+      <section className="border-b border-sand bg-beige/60 py-14 md:py-20">
+        <div className="wrap max-w-4xl text-center">
+          <p className="eyebrow mb-3 text-olive">About Kipusa Limited</p>
+          <h1 className="display h-xl text-charcoal">
+            Three divisions crafted for everyday beauty, print &amp; living.
+          </h1>
+          <p className="mx-auto mt-5 max-w-[60ch] text-base leading-relaxed text-charcoal/75 md:text-lg">
+            <strong>Kipusa Limited</strong> operates across three specialized
+            business sections—bringing together personal care products, custom
+            packaging and commercial printing, and calming home essentials.
+          </p>
         </div>
       </section>
-      <BrandStory />
-      <EditorialSection
-        eyebrow="Our people"
-        heading="Handmade by artisans"
-        body="Our team cuts, pours and packs every order by hand, in a workshop where fair pay, training and flexibility come first."
-        cta="Shop the collection"
-        href="/shop"
-        scene="artisan"
-        tone={4}
-        seed={11}
-        image="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1400&q=85"
-      />
-      <EditorialSection
-        flip
-        bg="bg-beige"
-        eyebrow="Our promise"
-        heading="30% back to community"
-        body="Thirty percent of profits are reinvested into social good projects, chosen together with the communities we work alongside."
-        cta="Shop now"
-        href="/shop"
-        scene="savanna"
-        tone={0}
-        seed={4}
-        image="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1400&q=85"
-      />
-    </>
+
+      {/* Three Business Divisions Breakdown */}
+      <section className="section wrap space-y-12">
+        {collections.map((c, idx) => (
+          <div
+            key={c.slug}
+            className="grid items-center gap-8 rounded-2xl border border-sand bg-white p-6 shadow-xs md:grid-cols-12 md:p-10"
+          >
+            <div
+              className={`md:col-span-5 ${
+                idx % 2 === 1 ? "md:order-2" : ""
+              }`}
+            >
+              <div className="aspect-[16/11] overflow-hidden rounded-xl bg-beige">
+                <Scene
+                  kind={c.scene}
+                  tone={c.tone}
+                  seed={idx + 3}
+                  image={c.image}
+                  alt={c.name}
+                />
+              </div>
+            </div>
+
+            <div
+              className={`md:col-span-7 ${
+                idx % 2 === 1 ? "md:order-1" : ""
+              }`}
+            >
+              <p className="eyebrow text-[10px] text-olive">{c.tagline}</p>
+              <h2 className="mt-2 font-serif text-3xl text-charcoal md:text-4xl">
+                {c.name}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-charcoal/75 sm:text-base">
+                {c.blurb}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {c.subcategories.map((sub) => (
+                  <span
+                    key={sub}
+                    className="rounded-md bg-beige px-3 py-1 text-xs text-charcoal/80"
+                  >
+                    {sub}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-6">
+                <Link
+                  href={`/collections/${c.slug}`}
+                  className="btn btn-dark gap-2"
+                >
+                  <span>{c.ctaLabel}</span>
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </section>
+    </div>
   );
 }

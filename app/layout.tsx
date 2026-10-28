@@ -8,15 +8,29 @@ import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import SearchOverlay from "@/components/SearchOverlay";
 
-const serif = Cormorant_Garamond({ subsets: ["latin"], weight: ["300", "400", "500"], style: ["normal", "italic"], variable: "--font-serif" });
-const sans = Jost({ subsets: ["latin"], weight: ["300", "400", "500"], variable: "--font-sans" });
+const serif = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+});
+const sans = Jost({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
-  title: "Organic Savanna — Responsible hair, body & skincare from Kenya",
-  description: "All-natural, sustainably sourced skincare, soaps and candles, handmade by artisans in Kenya.",
+  title: "Kipusa Limited — Kipusa Beauty, Kipusa Prints & Kipusa Home",
+  description:
+    "Explore Kipusa Limited: botanical skincare and personal care at Kipusa Beauty, custom packaging and commercial printing at Kipusa Prints, and everyday living essentials at Kipusa Home.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
       <body>
