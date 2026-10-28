@@ -21,7 +21,7 @@ export default function Hero() {
             <p className="mt-5 max-w-[54ch] text-base leading-relaxed text-charcoal/75 md:text-lg">
               Discover nourishing botanical skincare from{" "}
               <strong className="font-medium text-charcoal">Kipusa Beauty</strong>,
-              custom packaging and print production from{" "}
+              swift printing, graphic design, E-Citizen, and DHL services from{" "}
               <strong className="font-medium text-charcoal">Kipusa Prints</strong>,
               and calming everyday living essentials from{" "}
               <strong className="font-medium text-charcoal">Kipusa Home</strong>.
@@ -30,11 +30,11 @@ export default function Hero() {
             {/* Primary CTAs */}
             <div className="mt-8 flex flex-wrap items-center gap-3.5">
               <Link href="/shop" className="btn btn-dark gap-2">
-                <span>Browse All Divisions</span>
+                <span>Shop Products</span>
                 <ArrowRight size={15} />
               </Link>
-              <Link href="/contact" className="btn btn-line-dark">
-                Print &amp; Trade Inquiries
+              <Link href="/collections/kipusa-prints" className="btn btn-line-dark">
+                Explore Kipusa Prints Services
               </Link>
             </div>
 
@@ -52,7 +52,7 @@ export default function Hero() {
                   },
                   {
                     name: "Kipusa Prints",
-                    sub: "Labels, boxes & print",
+                    sub: "Print, design, E-Citizen & DHL",
                     href: "/collections/kipusa-prints",
                   },
                   {
@@ -101,27 +101,33 @@ export default function Hero() {
             </div>
 
             <div className="col-span-5 flex flex-col justify-between gap-4">
-              <div className="overflow-hidden rounded-2xl border border-sand bg-white shadow-sm">
+              <Link
+                href="/collections/kipusa-prints"
+                className="group overflow-hidden rounded-2xl border border-sand bg-white shadow-sm transition-colors hover:border-forest"
+              >
                 <div className="aspect-square w-full overflow-hidden">
                   <Scene
                     kind="artisan"
                     tone={2}
                     seed={5}
                     image="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=800&q=85"
-                    alt="Kipusa Prints packaging and custom stationery"
+                    alt="Kipusa Prints services"
                   />
                 </div>
                 <div className="p-3">
                   <p className="eyebrow text-[9px] text-terracotta">
                     Kipusa Prints
                   </p>
-                  <p className="font-serif text-sm text-charcoal sm:text-base">
-                    Packaging &amp; Print
+                  <p className="font-serif text-sm text-charcoal group-hover:text-forest sm:text-base">
+                    Printing, Design &amp; DHL
                   </p>
                 </div>
-              </div>
+              </Link>
 
-              <div className="overflow-hidden rounded-2xl border border-sand bg-white shadow-sm">
+              <Link
+                href="/collections/kipusa-home"
+                className="group overflow-hidden rounded-2xl border border-sand bg-white shadow-sm transition-colors hover:border-forest"
+              >
                 <div className="aspect-square w-full overflow-hidden">
                   <Scene
                     kind="candle"
@@ -133,11 +139,11 @@ export default function Hero() {
                 </div>
                 <div className="p-3">
                   <p className="eyebrow text-[9px] text-olive">Kipusa Home</p>
-                  <p className="font-serif text-sm text-charcoal sm:text-base">
+                  <p className="font-serif text-sm text-charcoal group-hover:text-forest sm:text-base">
                     Candles &amp; Home Care
                   </p>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,9 +1,9 @@
 "use client";
+import Link from "next/link";
 import { useState, useMemo } from "react";
-import { Search, X, Info } from "lucide-react";
+import { Search, X, Info, ArrowRight } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import {
-  collections,
   products,
   fromPrice,
   type BusinessSectionSlug,
@@ -11,7 +11,7 @@ import {
 
 export default function Shop() {
   const [sectionFilter, setSectionFilter] = useState<
-    "all" | BusinessSectionSlug
+    "all" | Exclude<BusinessSectionSlug, "kipusa-prints">
   >("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<"featured" | "price-asc" | "price-desc">(
@@ -44,11 +44,11 @@ export default function Shop() {
       <section className="border-b border-sand bg-beige/55 py-12 md:py-16">
         <div className="wrap text-center">
           <p className="eyebrow mb-2 text-olive">Kipusa Limited Storefront</p>
-          <h1 className="display h-xl text-charcoal">All Catalogue</h1>
-          <p className="mx-auto mt-3 max-w-[56ch] text-sm text-charcoal/75 sm:text-base">
-            Browse sample products and services across{" "}
-            <strong>Kipusa Beauty</strong>, <strong>Kipusa Prints</strong>, and{" "}
-            <strong>Kipusa Home</strong>.
+          <h1 className="display h-xl text-charcoal">Product Catalogue</h1>
+          <p className="mx-auto mt-3 max-w-[58ch] text-sm text-charcoal/75 sm:text-base">
+            Shop retail products from <strong>Kipusa Beauty</strong> and{" "}
+            <strong>Kipusa Home</strong>, or explore printing, design, E-Citizen,
+            and DHL services at <strong>Kipusa Prints</strong>.
           </p>
 
           {/* Division Filter Tabs */}
@@ -62,28 +62,39 @@ export default function Shop() {
                   : "border border-sand bg-white text-charcoal hover:border-forest"
               }`}
             >
-              All Divisions ({products.length})
+              All Products ({products.length})
             </button>
-            {collections.map((c) => {
-              const count = products.filter((p) => p.section === c.slug).length;
-              const active = sectionFilter === c.slug;
-              return (
-                <button
-                  key={c.slug}
-                  type="button"
-                  onClick={() =>
-                    setSectionFilter(c.slug as BusinessSectionSlug)
-                  }
-                  className={`rounded-lg px-4 py-2.5 text-xs font-medium uppercase tracking-wider transition-colors ${
-                    active
-                      ? "bg-forest text-cream"
-                      : "border border-sand bg-white text-charcoal hover:border-forest"
-                  }`}
-                >
-                  {c.name} ({count})
-                </button>
-              );
-            })}
+            <button
+              type="button"
+              onClick={() => setSectionFilter("kipusa-beauty")}
+              className={`rounded-lg px-4 py-2.5 text-xs font-medium uppercase tracking-wider transition-colors ${
+                sectionFilter === "kipusa-beauty"
+                  ? "bg-forest text-cream"
+                  : "border border-sand bg-white text-charcoal hover:border-forest"
+              }`}
+            >
+              Kipusa Beauty (
+              {products.filter((p) => p.section === "kipusa-beauty").length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setSectionFilter("kipusa-home")}
+              className={`rounded-lg px-4 py-2.5 text-xs font-medium uppercase tracking-wider transition-colors ${
+                sectionFilter === "kipusa-home"
+                  ? "bg-forest text-cream"
+                  : "border border-sand bg-white text-charcoal hover:border-forest"
+              }`}
+            >
+              Kipusa Home (
+              {products.filter((p) => p.section === "kipusa-home").length})
+            </button>
+            <Link
+              href="/collections/kipusa-prints"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-forest/30 bg-beige px-4 py-2.5 text-xs font-medium uppercase tracking-wider text-forest transition-colors hover:bg-forest hover:text-cream"
+            >
+              <span>Kipusa Prints Services</span>
+              <ArrowRight size={13} />
+            </Link>
           </div>
         </div>
       </section>
@@ -100,7 +111,7 @@ export default function Shop() {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search oils, scrubs, print labels, candles..."
+              placeholder="Search oils, scrubs, body butters, candles, soaps..."
               aria-label="Search catalogue"
               className="w-full rounded-lg border border-sand bg-white py-2.5 pl-10 pr-9 text-sm text-charcoal placeholder:text-charcoal/45 focus:border-forest focus:outline-none"
             />

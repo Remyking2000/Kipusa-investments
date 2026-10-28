@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Scene from "@/components/Scene";
 import CollectionCatalog from "@/components/CollectionCatalog";
+import KipusaPrintsView from "@/components/KipusaPrintsView";
 import {
   collections,
   getCollection,
@@ -32,7 +33,7 @@ export default function CollectionPage({
               Kipusa Limited · {c.tagline}
             </p>
             <h1 className="display h-xl text-charcoal">{c.name}</h1>
-            <p className="mt-4 max-w-[56ch] text-base leading-relaxed text-charcoal/75">
+            <p className="mt-4 max-w-[58ch] text-base leading-relaxed text-charcoal/75">
               {c.blurb}
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
@@ -66,7 +67,11 @@ export default function CollectionPage({
         </div>
       </section>
 
-      <CollectionCatalog collection={c} items={items} />
+      {c.slug === "kipusa-prints" ? (
+        <KipusaPrintsView />
+      ) : (
+        <CollectionCatalog collection={c} items={items} />
+      )}
     </>
   );
 }

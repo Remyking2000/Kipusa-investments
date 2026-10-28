@@ -38,7 +38,112 @@ export type Collection = {
   tone: number;
   image: string;
   ctaLabel: string;
+  isServiceDivision?: boolean;
 };
+
+export type PrintServiceItem = {
+  id: string;
+  title: string;
+  summary: string;
+  iconName:
+    | "printer"
+    | "copy"
+    | "book"
+    | "layers"
+    | "user-check"
+    | "globe";
+  ctaText: string;
+};
+
+export type CustomPrintCategory = {
+  title: string;
+  items: string[];
+  description: string;
+};
+
+export const kipusaPrintsServices: PrintServiceItem[] = [
+  {
+    id: "scanning-printing",
+    title: "Scanning & Printing",
+    summary:
+      "We resolve all your everyday and commercial printing needs with crisp document and photo printing and high-resolution scanning.",
+    iconName: "printer",
+    ctaText: "Inquire about printing rates",
+  },
+  {
+    id: "photocopy-services",
+    title: "Photocopy Services",
+    summary:
+      "Our high-speed machines accommodate all types of documents and photos for clear, reliable single or bulk copies.",
+    iconName: "copy",
+    ctaText: "Inquire about photocopy rates",
+  },
+  {
+    id: "lamination-binding",
+    title: "Lamination & Binding",
+    summary:
+      "Preserve and present your reports, proposals, and certificates with durable lamination and neat document binding.",
+    iconName: "book",
+    ctaText: "Inquire about binding & lamination",
+  },
+  {
+    id: "graphic-design",
+    title: "Graphic Design",
+    summary:
+      "Our in-house design team combines efficiency, creativity, and quality to prepare your layouts, branding, and artwork.",
+    iconName: "layers",
+    ctaText: "Start a graphic design brief",
+  },
+  {
+    id: "ecitizen-services",
+    title: "E-Citizen Services",
+    summary:
+      "All your E-Citizen needs in one convenient shop—fast assistance with online applications, renewals, and document printing.",
+    iconName: "user-check",
+    ctaText: "Get E-Citizen assistance",
+  },
+  {
+    id: "dhl-authorized-agent",
+    title: "DHL Authorized Agent",
+    summary:
+      "We help you deliver documents and packages with DHL—send anywhere in the world safely and swiftly.",
+    iconName: "globe",
+    ctaText: "Inquire about DHL dispatch",
+  },
+];
+
+export const kipusaPrintsMetrics = [
+  { value: "92 Hrs", label: "Per Week" },
+  { value: "99%", label: "Efficiency" },
+  { value: "100%", label: "Client Satisfaction" },
+];
+
+export const kipusaPrintsCustomSolutions: CustomPrintCategory[] = [
+  {
+    title: "Personalized Gifts & Keepsakes",
+    items: ["Custom Mugs", "Photo Frames", "Printed Cushions"],
+    description:
+      "Turn cherished memories and artwork into thoughtful keepsakes for families, children, and special occasions.",
+  },
+  {
+    title: "Custom Clothing & Apparel",
+    items: ["Custom T-Shirts", "Branded Apparel", "Event Wear"],
+    description:
+      "Quality garment printing featuring custom designs, team logos, or creative illustrations.",
+  },
+  {
+    title: "Stationery, Stickers & Publishing",
+    items: ["Colourful Notebooks", "Custom Stickers", "Book Publishing"],
+    description:
+      "From personalized notebooks and sticker labels to short-run publishing for educators, authors, and creatives.",
+  },
+  {
+    title: "Branded Business Materials",
+    items: ["Marketing Collateral", "Signage & Banners", "Corporate Print"],
+    description:
+      "Professional branded materials that bring creativity and quality together for your organization.",
+  },
+];
 
 export const collections: Collection[] = [
   {
@@ -58,26 +163,27 @@ export const collections: Collection[] = [
     tone: 1,
     image:
       "https://images.unsplash.com/photo-1608248597359-0e6d526a6828?auto=format&fit=crop&w=1200&q=85",
-    ctaLabel: "Explore Kipusa Beauty",
+    ctaLabel: "Shop Kipusa Beauty",
   },
   {
     slug: "kipusa-prints",
     name: "Kipusa Prints",
     shortName: "Prints",
-    tagline: "Custom Print, Packaging & Brand Collateral",
+    tagline: "Swift Printing, Design, E-Citizen & DHL Services",
     blurb:
-      "Bespoke product packaging, cosmetic labels, corporate stationery, lookbooks, and promotional print production tailored to growing brands.",
+      "Your one-stop service partner for scanning & printing, photocopying, lamination & binding, in-house graphic design, custom branded gifts, E-Citizen support, and worldwide DHL shipping.",
     subcategories: [
-      "Packaging & Product Labels",
-      "Corporate Stationery",
-      "Editorial & Lookbooks",
-      "Retail & Event Signage",
+      "Scanning & Printing",
+      "Photocopy, Lamination & Binding",
+      "Graphic Design & Custom Gifts",
+      "E-Citizen & DHL Authorized Agent",
     ],
     scene: "artisan",
     tone: 2,
     image:
       "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1200&q=85",
-    ctaLabel: "Explore Kipusa Prints",
+    ctaLabel: "Explore Kipusa Prints Services",
+    isServiceDivision: true,
   },
   {
     slug: "kipusa-home",
@@ -96,7 +202,7 @@ export const collections: Collection[] = [
     tone: 0,
     image:
       "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1200&q=85",
-    ctaLabel: "Explore Kipusa Home",
+    ctaLabel: "Shop Kipusa Home",
   },
 ];
 
@@ -275,155 +381,7 @@ export const products: Product[] = [
   },
 
   // ============================================================================
-  // 2. KIPUSA PRINTS (Packaging, Labels, Stationery, Editorial, Signage)
-  // ============================================================================
-  {
-    slug: "custom-product-labels-packaging",
-    name: "Custom Product Labels & Sleeves",
-    sub: "Textured Cotton, Matte & Foil Stamped Rolls",
-    section: "kipusa-prints",
-    sectionLabel: "Kipusa Prints",
-    category: "Packaging & Product Labels",
-    scene: "artisan",
-    tone: 2,
-    badge: "Kipusa Prints",
-    actionType: "inquiry",
-    isPlaceholder: true,
-    image:
-      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=900&q=85",
-    hoverImage:
-      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [
-      { label: "Starter Run (250 Labels)", price: 4500 },
-      { label: "Standard Run (500 Labels)", price: 7800 },
-      { label: "Commercial Run (1,000 Labels)", price: 13500 },
-    ],
-    description:
-      "Water- and oil-resistant custom die-cut labels and carton sleeves ideal for skincare bottles, jars, candles, and gourmet packaging. Available for direct pack ordering or custom quote inquiry. (Phase 1 sample print service.)",
-    details:
-      "Sample specification: Matte laminated, uncoated textured stock, or metallic foil finishes. Custom dielines supported.",
-  },
-  {
-    slug: "bespoke-rigid-gift-boxes",
-    name: "Branded Packaging & Gift Boxes",
-    sub: "Custom Printed Folding Cartons & Mailer Boxes",
-    section: "kipusa-prints",
-    sectionLabel: "Kipusa Prints",
-    category: "Packaging & Product Labels",
-    scene: "artisan",
-    tone: 4,
-    badge: "Kipusa Prints",
-    actionType: "inquiry",
-    isPlaceholder: true,
-    image:
-      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=85",
-    hoverImage:
-      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [
-      { label: "50 Custom Boxes", price: 8500 },
-      { label: "100 Custom Boxes", price: 15000 },
-      { label: "250 Custom Boxes", price: 32000 },
-    ],
-    description:
-      "Sturdy, custom-printed product boxes and e-commerce presentation mailers with optional tissue paper and insert dividers. (Phase 1 sample print service.)",
-    details:
-      "Sample specification: 350gsm–400gsm kraft or ivory board with custom full-colour or single-ink branding.",
-  },
-  {
-    slug: "executive-stationery-suite",
-    name: "Corporate & Boutique Stationery Suite",
-    sub: "Business Cards, Thank-You Notes & Letterheads",
-    section: "kipusa-prints",
-    sectionLabel: "Kipusa Prints",
-    category: "Corporate Stationery",
-    scene: "texture",
-    tone: 0,
-    badge: "Kipusa Prints",
-    actionType: "cart",
-    isPlaceholder: true,
-    image:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85",
-    hoverImage:
-      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [
-      { label: "100 Cards + Notes Pack", price: 3200 },
-      { label: "250 Cards + Notes Pack", price: 6400 },
-    ],
-    description:
-      "Heavyweight textured business cards, order enclosure thank-you cards, and branded stationery printed on archival paper stocks. (Phase 1 sample print service.)",
-    details:
-      "Sample specification: 350gsm–600gsm uncoated cotton and warm cream card stocks.",
-  },
-  {
-    slug: "editorial-lookbooks-catalogues",
-    name: "Lookbooks, Brochures & Brand Booklets",
-    sub: "Saddle-Stitched & Perfect-Bound Print Runs",
-    section: "kipusa-prints",
-    sectionLabel: "Kipusa Prints",
-    category: "Editorial & Lookbooks",
-    scene: "artisan",
-    tone: 1,
-    actionType: "inquiry",
-    isPlaceholder: true,
-    image:
-      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=900&q=85",
-    hoverImage:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [
-      { label: "50 Booklets (16 Pages)", price: 9500 },
-      { label: "100 Booklets (16 Pages)", price: 16800 },
-    ],
-    description:
-      "High-resolution editorial lookbooks, product catalogues, and event programmes printed with rich colour accuracy. (Phase 1 sample print service.)",
-    details:
-      "Sample specification: A5 or A4 portrait/landscape formats on silk or uncoated art paper.",
-  },
-  {
-    slug: "retail-display-event-signage",
-    name: "Retail Display & Event Signage Kit",
-    sub: "Tabletop Menus, Pull-Up Banners & POS Cards",
-    section: "kipusa-prints",
-    sectionLabel: "Kipusa Prints",
-    category: "Retail & Event Signage",
-    scene: "texture",
-    tone: 3,
-    actionType: "inquiry",
-    isPlaceholder: true,
-    image:
-      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=85",
-    hoverImage:
-      "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=900&q=85",
-    gallery: [
-      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1100&q=85",
-    ],
-    variants: [
-      { label: "Pop-Up Booth Signage Pack", price: 11500 },
-      { label: "Full Retail Display Bundle", price: 22000 },
-    ],
-    description:
-      "Cohesive point-of-sale counter cards, exhibition banners, and branded signage designed for pop-ups, markets, and retail shelves. (Phase 1 sample print service.)",
-    details:
-      "Sample specification: Custom-sized display boards, strut cards, and wide-format banners.",
-  },
-
-  // ============================================================================
-  // 3. KIPUSA HOME (Candles, Room Mists, Soaps, Lifestyle & Home Care)
+  // 2. KIPUSA HOME (Candles, Room Mists, Soaps, Lifestyle & Home Care)
   // ============================================================================
   {
     slug: "wild-grasses-candle",

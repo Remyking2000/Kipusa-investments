@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import { Info, CheckCircle2 } from "lucide-react";
 
@@ -15,28 +16,30 @@ export default function Contact() {
         <div className="md:col-span-5">
           <p className="eyebrow mb-3 text-olive">Kipusa Limited</p>
           <h1 className="display h-xl text-charcoal">
-            Inquiries &amp; Custom Orders
+            Service Inquiries &amp; Custom Requests
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-charcoal/75 sm:text-base">
-            Have a question about <strong>Kipusa Beauty</strong> products, a
-            custom packaging or print quote request for{" "}
-            <strong>Kipusa Prints</strong>, or an inquiry regarding{" "}
-            <strong>Kipusa Home</strong>? Use the form to prepare your inquiry.
+            Reach out to <strong>Kipusa Prints</strong> for scanning &amp;
+            printing rates, photocopy, lamination &amp; binding, graphic design,
+            personalized gifts, E-Citizen services, or DHL package delivery—or
+            inquire about products from <strong>Kipusa Beauty</strong> and{" "}
+            <strong>Kipusa Home</strong>.
           </p>
 
           <div className="mt-8 space-y-4 rounded-2xl border border-sand bg-beige/60 p-6 text-xs text-charcoal/75">
             <p className="eyebrow text-[10px] text-forest">
-              Business Divisions
+              Kipusa Limited Divisions
             </p>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
+              <li>
+                <strong className="text-charcoal">Kipusa Prints:</strong>{" "}
+                Scanning &amp; printing, photocopy, lamination &amp; binding,
+                graphic design, custom gifts &amp; apparel, E-Citizen services,
+                and authorized DHL shipping.
+              </li>
               <li>
                 <strong className="text-charcoal">Kipusa Beauty:</strong> Oils,
                 scrubs, body butters &amp; skincare catalogue inquiries.
-              </li>
-              <li>
-                <strong className="text-charcoal">Kipusa Prints:</strong>{" "}
-                Product labels, branded boxes, stationery &amp; custom print
-                quotes.
               </li>
               <li>
                 <strong className="text-charcoal">Kipusa Home:</strong> Scented
@@ -69,13 +72,18 @@ export default function Contact() {
                   been validated in the Phase 1 frontend interface. Backend
                   email/database dispatch is scheduled for Phase 2/3.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => setSent(false)}
-                  className="btn btn-line-dark mt-6"
-                >
-                  Send Another Inquiry
-                </button>
+                <div className="mt-6 flex flex-wrap justify-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setSent(false)}
+                    className="btn btn-line-dark"
+                  >
+                    Send Another Inquiry
+                  </button>
+                  <Link href="/collections/kipusa-prints" className="btn btn-dark">
+                    Back to Kipusa Prints
+                  </Link>
+                </div>
               </div>
             ) : (
               <form
@@ -87,24 +95,30 @@ export default function Contact() {
               >
                 <div>
                   <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-charcoal/80">
-                    Select Business Section
+                    Select Division or Service
                   </label>
                   <select
                     value={division}
                     onChange={(e) => setDivision(e.target.value)}
                     className={field}
                   >
-                    <option value="Kipusa Prints">
-                      Kipusa Prints — Custom Print &amp; Packaging Quote
+                    <option value="Kipusa Prints — Scanning, Printing, Photocopy & Binding">
+                      Kipusa Prints — Scanning, Printing, Photocopy &amp; Binding
+                    </option>
+                    <option value="Kipusa Prints — Graphic Design & Custom Gifts/Apparel">
+                      Kipusa Prints — Graphic Design, Custom Gifts &amp; Apparel
+                    </option>
+                    <option value="Kipusa Prints — E-Citizen Services">
+                      Kipusa Prints — E-Citizen Services
+                    </option>
+                    <option value="Kipusa Prints — DHL Authorized Agent">
+                      Kipusa Prints — DHL Authorized Agent Shipping
                     </option>
                     <option value="Kipusa Beauty">
                       Kipusa Beauty — Skincare &amp; Personal Care Inquiry
                     </option>
                     <option value="Kipusa Home">
                       Kipusa Home — Home &amp; Lifestyle Inquiry
-                    </option>
-                    <option value="Kipusa Limited (General)">
-                      Kipusa Limited — General Inquiry
                     </option>
                   </select>
                 </div>
@@ -135,29 +149,29 @@ export default function Contact() {
 
                 <div>
                   <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-charcoal/80">
-                    Subject / Product or Service Reference
+                    Subject / Service Needed
                   </label>
                   <input
                     required
-                    placeholder="e.g., Custom Product Labels (500 units) or Kipusa Beauty Order"
+                    placeholder="e.g., Document Printing & Binding, Custom Mugs/T-Shirts, or DHL Dispatch"
                     className={field}
                   />
                 </div>
 
                 <div>
                   <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-charcoal/80">
-                    Inquiry Details
+                    How can we help you?
                   </label>
                   <textarea
                     required
                     rows={5}
-                    placeholder="Share your quantities, print dimensions, or product questions..."
+                    placeholder="Tell us about your printing needs, custom gift idea, design brief, or inquiry..."
                     className={field}
                   />
                 </div>
 
                 <button type="submit" className="btn btn-dark w-full sm:w-auto">
-                  Submit Inquiry (Phase 1 Preview)
+                  Submit Service Inquiry
                 </button>
               </form>
             )}
