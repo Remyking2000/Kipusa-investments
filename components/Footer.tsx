@@ -12,9 +12,9 @@ export default function Footer() {
       <div className="wrap py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Logo className="items-start" />
+            <Logo variant="light" className="justify-start" />
             <p className="mt-5 max-w-[44ch] text-sm leading-relaxed text-cream/75">
-              Kipusa Limited brings together{" "}
+              Kipusa Investments Limited brings together{" "}
               <strong className="font-medium text-cream">Kipusa Beauty</strong>,{" "}
               <strong className="font-medium text-cream">Kipusa Prints</strong>,
               and <strong className="font-medium text-cream">Kipusa Home</strong>{" "}
@@ -58,7 +58,7 @@ export default function Footer() {
                   <Link href="/cart">Shopping Bag</Link>
                 </li>
                 <li>
-                  <Link href="/contact">Print Quote Inquiry</Link>
+                  <Link href="/contact">Print &amp; Service Inquiry</Link>
                 </li>
               </ul>
             </div>
@@ -67,7 +67,7 @@ export default function Footer() {
               <p className="eyebrow mb-4 text-[10px] text-sage">Company</p>
               <ul className={col}>
                 <li>
-                  <Link href="/about">About Kipusa Limited</Link>
+                  <Link href="/about">About Kipusa</Link>
                 </li>
                 <li>
                   <Link href="/contact">Contact &amp; Inquiries</Link>
@@ -78,7 +78,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-cream/15 pt-8 text-xs text-cream/60 md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} Kipusa Limited. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Kipusa Investments Limited. All rights
+            reserved.
+          </p>
           <p>
             Phase 1 Storefront Design — Sample catalogue entries and pricing are
             placeholders pending official inventory and Phase 2/3 backend

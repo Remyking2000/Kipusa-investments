@@ -1,18 +1,26 @@
 import Link from "next/link";
 
-export default function Logo({ className = "" }: { className?: string }) {
+export default function Logo({
+  className = "",
+  variant = "dark",
+}: {
+  className?: string;
+  variant?: "dark" | "light";
+}) {
+  const src =
+    variant === "light" ? "/kipusa-logo-light.png" : "/kipusa-logo.png";
+
   return (
     <Link
       href="/"
-      className={`inline-flex flex-col items-center leading-none ${className}`}
-      aria-label="Kipusa Limited home"
+      className={`inline-flex items-center justify-center ${className}`}
+      aria-label="Kipusa Investments Limited home"
     >
-      <span className="font-sans text-[20px] font-normal uppercase tracking-[0.22em] md:text-[23px]">
-        KIPUSA
-      </span>
-      <span className="mt-1 font-sans text-[14px] font-normal uppercase tracking-[0.28em] md:text-[16px]">
-        LIMITED
-      </span>
+      <img
+        src={src}
+        alt="Kipusa Investments Limited"
+        className="h-11 w-auto object-contain transition-all duration-300 md:h-14"
+      />
     </Link>
   );
 }
