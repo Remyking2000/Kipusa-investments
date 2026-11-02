@@ -3,6 +3,7 @@ import Link from "next/link";
 import Scene from "@/components/Scene";
 import CollectionCatalog from "@/components/CollectionCatalog";
 import KipusaPrintsView from "@/components/KipusaPrintsView";
+import KipusaHomeView from "@/components/KipusaHomeView";
 import {
   collections,
   getCollection,
@@ -22,6 +23,11 @@ export default function CollectionPage({
   if (!c) notFound();
 
   const items = products.filter((p) => p.section === c.slug);
+
+  // Kipusa Home has its own dedicated interior studio hero & editorial experience
+  if (c.slug === "kipusa-home") {
+    return <KipusaHomeView homeProducts={items} />;
+  }
 
   return (
     <>

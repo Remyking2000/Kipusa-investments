@@ -189,20 +189,20 @@ export const collections: Collection[] = [
     slug: "kipusa-home",
     name: "Kipusa Home",
     shortName: "Home",
-    tagline: "Home Fragrance, Living & Everyday Care",
+    tagline: "Peaceful. Warm. Serene. Spaces.",
     blurb:
-      "Hand-poured scented candles, botanical room sprays, cold-process soaps, and thoughtful lifestyle pieces designed for calm, welcoming spaces.",
+      "Creating personalized living spaces that reflect your personality, enrich your lifestyle, and make every moment at home more meaningful—through interior design, décor sourcing, home styling, and curated living.",
     subcategories: [
-      "Scented Candles",
-      "Room & Linen Mists",
-      "Artisan Bar Soaps",
-      "Surface & Home Care",
+      "Interior Design & Concept Design",
+      "Décor Sourcing & Home Styling",
+      "Seasonal & Event Décor",
+      "Project Implementation & Handover",
     ],
     scene: "candle",
     tone: 0,
     image:
-      "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1200&q=85",
-    ctaLabel: "Shop Kipusa Home",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85",
+    ctaLabel: "Explore Kipusa Home",
   },
 ];
 

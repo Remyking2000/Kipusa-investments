@@ -60,21 +60,21 @@ export default function Home() {
 
       {/* Editorial 3: Kipusa Home */}
       <EditorialSection
-        eyebrow="Kipusa Home · Everyday Living"
-        heading="Hand-Poured Candles, Soaps & Home Care"
-        body="Scented soy candles, botanical room mists, cold-process soaps, and gentle surface care designed to bring calm and warmth into your home."
-        cta="Shop Kipusa Home"
+        eyebrow="Kipusa Home · Peaceful. Warm. Serene. Spaces."
+        heading="Personalized Interior Design & Home Styling"
+        body="Creating personalized living spaces that reflect your personality, enrich your lifestyle, and make every moment at home more meaningful—from concept design and décor sourcing to full project implementation."
+        cta="Explore Kipusa Home"
         href="/collections/kipusa-home"
         scene="botanical"
         tone={1}
         seed={8}
-        image="https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1400&q=85"
+        image="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=85"
         inset={{
           scene: "soap",
           tone: 0,
           seed: 6,
           image:
-            "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=800&q=85",
+            "https://images.unsplash.com/photo-1615529182904-14819c35db37?auto=format&fit=crop&w=800&q=85",
         }}
       />
 

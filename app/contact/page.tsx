@@ -42,8 +42,10 @@ export default function Contact() {
                 scrubs, body butters &amp; skincare catalogue inquiries.
               </li>
               <li>
-                <strong className="text-charcoal">Kipusa Home:</strong> Scented
-                candles, room mists, artisan soaps &amp; home essentials.
+                <strong className="text-charcoal">Kipusa Home:</strong> Interior
+                design, décor sourcing, consultation &amp; concept design, home
+                styling, seasonal &amp; event décor, project implementation, and
+                Kipusa Home Certification.
               </li>
             </ul>
             <div className="flex items-start gap-2 border-t border-sand pt-3 text-[11px] text-charcoal/65">
@@ -117,8 +119,14 @@ export default function Contact() {
                     <option value="Kipusa Beauty">
                       Kipusa Beauty — Skincare &amp; Personal Care Inquiry
                     </option>
-                    <option value="Kipusa Home">
-                      Kipusa Home — Home &amp; Lifestyle Inquiry
+                    <option value="Kipusa Home — Interior Design & Concept Consultation">
+                      Kipusa Home — Interior Design &amp; Concept Consultation
+                    </option>
+                    <option value="Kipusa Home — Décor Sourcing, Styling & Event Décor">
+                      Kipusa Home — Décor Sourcing, Styling &amp; Seasonal/Event Décor
+                    </option>
+                    <option value="Kipusa Home — Project Implementation & Certification">
+                      Kipusa Home — Project Implementation &amp; Certification
                     </option>
                   </select>
                 </div>

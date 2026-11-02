@@ -37,15 +37,15 @@ const slides: {
       "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1800&q=85",
   },
   {
-    eyebrow: "KIPUSA HOME · HAND-POURED CANDLES, SOAPS & LIVING",
-    title: "WARMTH & CALM FOR EVERYDAY SPACES",
-    cta: "SHOP NOW",
+    eyebrow: "KIPUSA HOME · INTERIOR DESIGN, STYLING & CURATED LIVING",
+    title: "PEACEFUL. WARM. SERENE. SPACES.",
+    cta: "EXPLORE KIPUSA HOME",
     href: "/collections/kipusa-home",
     scene: "candle",
     tone: 2,
     seed: 4,
     image:
-      "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1800&q=85",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85",
   },
   {
     eyebrow: "KIPUSA LIMITED · BEAUTY · PRINTS · HOME",
